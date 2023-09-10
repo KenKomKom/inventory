@@ -1,9 +1,10 @@
 # inventory
-1. Pertama-tama saya membuat folder baru bernama "trading_game" kemudian menyalakan virtual environment dengan menjalankan line "python -m venv env", kemudian membuat project dengan line
-   "django-admin startproject trading_game" di cmd. Setelah project sudah ada, saya lanjutkan dengan membuat app dengan "django-admin startapp main". Saya menambahkan line di file urls.py agar saat
-   client membuat request ke server, client bisa menjangkau app "main". Setelah itu saya membuat program views milik app untuk men-return template dan response berisi data dari model. Setelah itu
-   saya membuat class Items di models.py milik app beserta dengan attribute class-nya.
-   Saya pun menambahkan file initialize_item.json untuk membuat instansiasi dari Items di-list dan menggunakan command "django-admin loaddata initialize_item" sehingga objek dari models terbentuk.
+1. Pertama-tama saya membuat folder baru bernama "UI/Sem3/pbp/tugas2" kemudian menyalakan virtual environment dengan menjalankan line "python -m venv env", kemudian membuat project dengan line
+   "django-admin startproject inventory" di cmd. Setelah project sudah ada, saya lanjutkan dengan membuat app dengan "django-admin startapp main". Saya menambahkan line di file "urls.py" agar saat
+   client membuat request ke server, client bisa menjangkau app "main". Setelah itu saya membuat program "views.py" milik app untuk men-return template dan response berisi data dari model. Setelah itu
+   saya membuat class Vehicle di "models.py" milik app beserta dengan attribute class-nya.
+   Saya pun menambahkan file initialize_item.json untuk membuat instansiasi dari main.Vehicle di-list dan menggunakan command "django-admin loaddata initialize_item" sehingga objek dari models
+   terbentuk.
    Setelah itu saya bermain dengan html dan css untuk waktu yang terlalu lama.
 2. ![Bagan Penjelasan request response](BaganTugas2.PNG)
 3. Virtual environment digunakan dalam pengembangan aplikasi django untuk mempermudah pengerjaan kita karena kita menghilangkan masalah dari ketergantungan terhadap versi django dan requirements lain
