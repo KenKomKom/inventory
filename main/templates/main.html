@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>We Want Vehicles</title>
+    </head>
+    <style>
+    body{
+        margin: 0;
+    }
+    header{
+        font-family: Arial,'Montserrat', Helvetica, sans-serif;
+    }
+
+    h1{
+        font-weight: 700;
+        padding:0px;
+        font-size: 160px;
+        margin-bottom: 20px;
+        color: antiquewhite;
+    }
+    .home{
+        padding-left: 5%;
+        background-color: #205E4F;
+        padding-top: 0.2%;
+        padding-bottom: 0.2%;
+
+    }
+    .red{
+        color: #F19A4D;
+    }
+    .home p{
+        color: antiquewhite;
+        margin-bottom: 100px;
+        font-size: 48px;
+        font-weight: 600;
+    }
+
+    .navbar{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+        
+        position: sticky;
+        top:0;
+
+        background-color: antiquewhite;
+        font-family: Arial,'Montserrat', Helvetica, sans-serif;
+        padding:0% 0% 0% 0%;
+    }
+
+    .navbar #topnav{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        background-color: #F19A4D;
+        width: 100%;
+        padding-top: 1%;
+        padding-bottom: 1%;
+    }
+    .navbar #botnav{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        width: 100%;
+    }
+
+    .navbar #navbarTitle{
+        font-weight: 700;
+        font-size: 28px;
+        color: antiquewhite;
+        text-decoration: none;
+    }
+
+    .navbar #navbarAbout{
+        margin: 0px;
+        position: sticky;
+        top: 0;
+        font-size: 24px;
+        font-weight: 400;
+        color: antiquewhite;
+    }
+
+    img{
+        height: 40%;
+        padding: 0px;
+        margin: 0px;
+    }
+    .cards{
+        background-color: #43B972;
+        width: 100%;
+        height: 1000px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-flow: column wrap;
+    }
+    .cards h1{
+        margin-bottom: 10%;
+        margin-top: 0px;
+    }
+    .container{
+        display: flex;
+        justify-content: center;
+        gap: 17px;
+        flex-flow:wrap;
+        padding: 0px;
+        width: 100%px;
+        margin-top: 0px;
+    }
+
+    .card{
+        box-sizing: border-box;
+        display: flex;
+        background-color: #213150;
+        width: 200px;
+        height: 300px;
+        justify-content: center;
+        align-items: center;
+        border-radius: 5%;
+        flex-direction: column;
+        box-shadow:inset;
+    }
+    .card #cardname{
+        font-size: 28px;
+        font-weight: 700;
+        margin-bottom: 2%;
+    }
+    .card p{
+        font-family: Arial,'Montserrat', Helvetica, sans-serif;
+        font-weight: 500;
+        color: antiquewhite;
+        text-align: center;
+        margin: 5px 0 5px 0;
+    }
+    </style>
+    <body>
+        <header>
+            <div class="home">
+                <h1>We Want<br/><span class="red">Vehicles</span></h1>
+                <p>Vehicle database</p>
+            </div>
+        </header>
+        <div class="navbar">
+            <div id="topnav">
+                <a href = "" id="navbarTitle">We Want Vehicles</span></a>
+                <p id="navbarAbout">About Us</p>
+            </div>
+            <div id ="botnav">
+                <p>Nama : {{name}}</p>
+                <p>Kelas : {{class}}</p>
+            </div>
+        </div>
+        <div class = "cards">
+            <h1>VEHICLES</h1>
+            <div class = "container">
+                {% for v in vehicle %}
+                <div class="card">
+                    <p id="cardname">{{v.name}}</p>
+                    <img src={{v.image_link}} alt="{{v.name}}">
+                    <p>Amount : {{v.amount}}</p>
+                    <p>{{v.description}}</p>
+                    <br/>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </body>
+</html>

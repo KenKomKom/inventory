@@ -1,0 +1,20 @@
+[
+    {
+        "model":"main.Vehicle",
+        "fields":{
+            "name" : "GamifyTruk",
+            "amount":"10",
+            "description":"Compfest ada game\nristek gamedev guys!",
+            "image_link":"https://drive.google.com/uc?export=view&id=1f2FrxwgEWtFQkWf0TiGz6OxSGhvhtyXU"
+        }
+    },
+    {
+        "model":"main.Vehicle",
+        "fields":{
+            "name" : "BlackCar",
+            "amount":"14",
+            "description":"Cool looking black car",
+            "image_link": "https://drive.google.com/uc?export=view&id=1a7u66zwHlRj3PGkpN"
+        }
+    }
+]
