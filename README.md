@@ -1,21 +1,22 @@
 inventory
 ---
 Ini adalah repository dari aplikasi web Inventory dengan link -> https://tugas2pbp-inventory.adaptable.app/main
-1. Pertama-tama saya membuat folder baru bernama "UI/Sem3/pbp/tugas2" kemudian menyalakan virtual environment dengan menjalankan line "python -m venv env", kemudian membuat project dengan line
+1. Pertama-tama saya membuat repository lokal bernama "UI/Sem3/pbp/tugas2".
+   Setelah itu saya menyalakan virtual environment dengan menjalankan line "python -m venv env", kemudian membuat project dengan line
    "django-admin startproject inventory" di cmd. Setelah project sudah ada, saya lanjutkan dengan membuat app dengan "django-admin startapp main". Saya menambahkan line di file "urls.py" agar saat
    client membuat request ke server, client bisa menjangkau app "main". Setelah itu saya membuat program "views.py" milik app untuk men-return template dan response berisi data dari model. Setelah itu
    saya membuat class Vehicle di "models.py" milik app beserta dengan attribute class-nya.
    Saya pun menambahkan file initialize_item.json untuk membuat instansiasi dari main.Vehicle di-list dan menggunakan command "django-admin loaddata initialize_item" sehingga objek dari models
    terbentuk.
    Setelah itu saya bermain dengan html dan css untuk waktu yang terlalu lama.
-2. ![Bagan Penjelasan request response](BaganTugas2.PNG)
-3. Virtual environment digunakan dalam pengembangan aplikasi django untuk mempermudah pengerjaan kita karena kita menghilangkan masalah dari ketergantungan terhadap versi django dan requirements lain
+3. ![Bagan Penjelasan request response](BaganTugas2.PNG)
+4. Virtual environment digunakan dalam pengembangan aplikasi django untuk mempermudah pengerjaan kita karena kita menghilangkan masalah dari ketergantungan terhadap versi django dan requirements lain
    yang diperlukan untuk program berjalan. Dengan kita membuat virtual environment, segala requirements yang kita download hanya berpengaruh di environment tersebut misalkan jika mengerjakan berbagai
    projek django yang tiap projek dibuat dengan versi django yang berbeda. Dengan adanya virtual environment tiap django yang kita download untuk menyesuaikan versi tiap django projek hanya
    berpengaruh pada masing-masing environment tersebut dan kita tidak perlu berulang-ulang download tiap versi django jika kita mengerjakan projek-projek tersebut secara bergantian. Jadi, virtual
    environment sebenarnya tidak diperlukan untuk menjalankan suatu projek django. Namun, akan sangat membantu saat kita mengerjakan berbagai projek django dengan versi yang berbeda-beda.
 
-4. MVC adalah pola arsitektur dari suatu aplikasi yang memisahkan aplikasi menjadi tiga komponen utama yaitu model, view dan controller.
+5. MVC adalah pola arsitektur dari suatu aplikasi yang memisahkan aplikasi menjadi tiga komponen utama yaitu model, view dan controller.
    Model merupakan bagian yang berhubungan dengan semua logika yang berhubungan dengan data yang dimiliki.
    View merupakan bagian dari aplikasi yang berhubungan dengan tampilan aplikasi dan mengandung elemen seperti semua komponen UI untuk user berinteraksi berserta data yang didapatkan dari controller.
    Controller merupakan bagian yang berfungsi untuk memproses semua request yang masuk serta memanipulasi data dari dan pada model dan mengatur tampilan view serta data yang akan digunakan pada view
