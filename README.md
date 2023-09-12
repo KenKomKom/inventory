@@ -3,9 +3,9 @@ inventory
 Ini adalah repository dari aplikasi web Inventory dengan link -> https://tugas2pbp-inventory.adaptable.app/main
 1. Pertama-tama saya membuat repository lokal bernama "UI/Sem3/pbp/tugas2".
    
-   [#] Setelah itu saya menyalakan virtual environment dengan menjalankan command
+   Setelah itu saya menyalakan virtual environment dengan menjalankan command
 
-   python -m venv env
+   ```python -m venv env```
 
    pada command prompt, kemudian membuat project dengan line
    "django-admin startproject inventory" di cmd. Setelah project sudah ada, saya lanjutkan dengan membuat app dengan "django-admin startapp main". Saya menambahkan line di file "urls.py" agar saat
