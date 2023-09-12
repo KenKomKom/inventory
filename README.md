@@ -3,7 +3,7 @@ inventory
 Ini adalah repository dari aplikasi web Inventory dengan link -> https://tugas2pbp-inventory.adaptable.app/main
 1. Pertama-tama saya membuat repository lokal bernama "UI/Sem3/pbp/tugas2".
    
-   [x]Setelah itu saya menyalakan virtual environment dengan menjalankan command
+   [#] Setelah itu saya menyalakan virtual environment dengan menjalankan command
    ---
    python -m venv env
    ---
