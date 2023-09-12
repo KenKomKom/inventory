@@ -33,12 +33,12 @@ Ini adalah repository dari aplikasi web Inventory dengan link -> https://tugas2p
    dan juga
    ```python
    from django.urls import path
-   from .views import show_cards
+   from .views import main
 
    app_name='main'
 
    urlpatterns = [
-       path('', show_cards, name='show_cards'),
+       path('', main, name='main'),
    ]
    ```
    pada file main/urls.py agar saat client membuat request ke server, client bisa menjangkau app "main".
@@ -46,16 +46,16 @@ Ini adalah repository dari aplikasi web Inventory dengan link -> https://tugas2p
    Setelah itu saya memasukan line
    ```python
    from django.shortcuts import render
-   from .models import Items
+   from .models import Vehicle
 
    # Create your views here.
-   def show_cards(request):
-       all_card = Items.objects.all().values()
+   def main(request):
+       response = {'name':'KenichiKomala','class': 'PBP D'}
+       all_vehicle = Vehicle.objects.all().values()
     
-       response = {'cards': all_card}
-       print(all_card)
+       response['vehicle']= all_vehicle
     
-       return render(request, 'show_cards.html', response)
+       return render(request, 'main.html', response)
    ```
    pada"views.py" milik app untuk men-return template dan response berisi data dari model.
    Setelah itu saya membuat class Vehicle di "models.py" milik app beserta dengan attribute class-nya. dengan line
@@ -63,7 +63,7 @@ Ini adalah repository dari aplikasi web Inventory dengan link -> https://tugas2p
    from django.db import models
 
    # Create your models here.
-   class Items (models.Model):
+   class Vehicle (models.Model):
        name = models.CharField(max_length=20)
        amount = models.IntegerField()
        description = models.TextField()
