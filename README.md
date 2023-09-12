@@ -9,7 +9,7 @@ Ini adalah repository dari aplikasi web Inventory dengan link -> https://tugas2p
 
    Setelah project sudah ada, saya lanjutkan dengan membuat app dengan command ```django-admin startapp main```
    Saya menambahkan line
-   ```
+   ```python
    from django.contrib import admin
 from django.urls import path, include
 
@@ -17,7 +17,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('main', include('main.urls'))
 ]
-```
+   ```
    di file "urls.py" agar saat client membuat request ke server, client bisa menjangkau app "main".
 
 Setelah itu saya memasukan line
