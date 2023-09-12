@@ -15,7 +15,10 @@ Ini adalah repository dari aplikasi web Inventory dengan link -> https://tugas2p
 
    di command prompt.
 
-   Setelah project sudah ada, saya lanjutkan dengan membuat app dengan "django-admin startapp main". Saya menambahkan line di file "urls.py" agar saat
+   Setelah project sudah ada, saya lanjutkan dengan membuat app dengan command
+   ```django-admin startapp main```
+
+   Saya menambahkan line di file "urls.py" agar saat
    client membuat request ke server, client bisa menjangkau app "main". Setelah itu saya membuat program "views.py" milik app untuk men-return template dan response berisi data dari model. Setelah itu
    saya membuat class Vehicle di "models.py" milik app beserta dengan attribute class-nya.
    Saya pun menambahkan file initialize_item.json untuk membuat instansiasi dari main.Vehicle di-list dan menggunakan command "django-admin loaddata initialize_item" sehingga objek dari models
