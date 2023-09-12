@@ -3,7 +3,7 @@ inventory
 Ini adalah repository dari aplikasi web Inventory dengan link -> https://tugas2pbp-inventory.adaptable.app/main
 1. Pertama-tama saya membuat repository lokal bernama "UI/Sem3/pbp/tugas2".
    
-   Setelah itu saya menyalakan virtual environment dengan menjalankan command ```python -m venv env``` pada command prompt.
+   Setelah itu saya menyalakan virtual environment dengan menjalankan command ``` python -m venv env ``` pada command prompt.
 
    Kemudian membuat project dengan line ```django-admin startproject inventory``` di command prompt.
 
@@ -11,17 +11,17 @@ Ini adalah repository dari aplikasi web Inventory dengan link -> https://tugas2p
    Saya menambahkan line
    ```python
    from django.contrib import admin
-from django.urls import path, include
+   from django.urls import path, include
 
-urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('main', include('main.urls'))
-]
+   urlpatterns = [
+   path('admin/', admin.site.urls),
+   path('main', include('main.urls'))
+   ]
    ```
    di file "urls.py" agar saat client membuat request ke server, client bisa menjangkau app "main".
 
 Setelah itu saya memasukan line
-```
+```python
 from django.shortcuts import render
 from .models import Items
 
