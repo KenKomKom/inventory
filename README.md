@@ -74,7 +74,8 @@ Ini adalah repository dari aplikasi web Inventory dengan link -> https://tugas2p
    menggunakan command ```django-admin loaddata initialize_item``` sehingga objek dari models terbentuk dan bisa dimasukan ke webpage.
    Setelah itu saya bermain dengan html dan css untuk waktu yang terlalu lama.
    
-2. ![Bagan Penjelasan request response](BaganTugas2.PNG)
+2. 
+   ![Bagan Penjelasan request response](BaganTugas2.PNG)
    
 3. Virtual environment digunakan dalam pengembangan aplikasi django untuk mempermudah pengerjaan kita karena kita menghilangkan masalah dari ketergantungan terhadap versi django dan requirements lain
    yang diperlukan untuk program berjalan. Dengan kita membuat virtual environment, segala requirements yang kita download hanya berpengaruh di environment tersebut misalkan jika mengerjakan berbagai
