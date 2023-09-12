@@ -20,7 +20,7 @@ Ini adalah repository dari aplikasi web Inventory dengan link -> https://tugas2p
    ]
    ```
    
-   Saya menambahkan line
+   Saya menambahkan line pada file "urls.py" milik inventory
    ```python
    from django.contrib import admin
    from django.urls import path, include
@@ -30,7 +30,18 @@ Ini adalah repository dari aplikasi web Inventory dengan link -> https://tugas2p
    path('main', include('main.urls'))
    ]
    ```
-   di file "urls.py" agar saat client membuat request ke server, client bisa menjangkau app "main".
+   dan juga
+   ```python
+   from django.urls import path
+   from .views import show_cards
+
+   app_name='main'
+
+   urlpatterns = [
+       path('', show_cards, name='show_cards'),
+   ]
+   ```
+   pada file main/urls.py agar saat client membuat request ke server, client bisa menjangkau app "main".
 
    Setelah itu saya memasukan line
    ```python
