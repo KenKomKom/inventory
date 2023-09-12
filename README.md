@@ -8,6 +8,18 @@ Ini adalah repository dari aplikasi web Inventory dengan link -> https://tugas2p
    Kemudian membuat project dengan line ```django-admin startproject inventory``` di command prompt.
 
    Setelah project sudah ada, saya lanjutkan dengan membuat app dengan command ```django-admin startapp main```
+
+   Pada file settings.py pada inventory saya menambahkan line
+   ```python
+   ALLOWED_HOSTS = ['*']
+   
+   INSTALLED_APPS = [
+   ...
+   ...
+   'main',
+   ]
+   ```
+   
    Saya menambahkan line
    ```python
    from django.contrib import admin
@@ -20,24 +32,35 @@ Ini adalah repository dari aplikasi web Inventory dengan link -> https://tugas2p
    ```
    di file "urls.py" agar saat client membuat request ke server, client bisa menjangkau app "main".
 
-Setelah itu saya memasukan line
-```python
-from django.shortcuts import render
-from .models import Items
+   Setelah itu saya memasukan line
+   ```python
+   from django.shortcuts import render
+   from .models import Items
 
-# Create your views here.
-def show_cards(request):
-    all_card = Items.objects.all().values()
+   # Create your views here.
+   def show_cards(request):
+       all_card = Items.objects.all().values()
     
-    response = {'cards': all_card}
-    print(all_card)
+       response = {'cards': all_card}
+       print(all_card)
     
-    return render(request, 'show_cards.html', response)
-```
-pada"views.py" milik app untuk men-return template dan response berisi data dari model. Setelah itu
-   saya membuat class Vehicle di "models.py" milik app beserta dengan attribute class-nya.
-   Saya pun menambahkan file initialize_item.json untuk membuat instansiasi dari main.Vehicle di-list dan menggunakan command "django-admin loaddata initialize_item" sehingga objek dari models
-   terbentuk.
+       return render(request, 'show_cards.html', response)
+   ```
+   pada"views.py" milik app untuk men-return template dan response berisi data dari model.
+   Setelah itu saya membuat class Vehicle di "models.py" milik app beserta dengan attribute class-nya. dengan line
+   ```python
+   from django.db import models
+
+   # Create your models here.
+   class Items (models.Model):
+       name = models.CharField(max_length=20)
+       amount = models.IntegerField()
+       description = models.TextField()
+       image_link = models.TextField(default="")
+   ```
+   pada "main/models.py"
+   Saya pun menambahkan file "initialize_item.json" untuk membuat instansiasi dari model Vehicle di main. Vehicle di-list pada file tersebut dalam bentuk list of dictionary dan          
+   menggunakan command "django-admin loaddata initialize_item" sehingga objek dari models terbentuk dan bisa dimasukan ke webpage.
    Setelah itu saya bermain dengan html dan css untuk waktu yang terlalu lama.
 3. ![Bagan Penjelasan request response](BaganTugas2.PNG)
 4. Virtual environment digunakan dalam pengembangan aplikasi django untuk mempermudah pengerjaan kita karena kita menghilangkan masalah dari ketergantungan terhadap versi django dan requirements lain
