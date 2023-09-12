@@ -75,6 +75,7 @@ Ini adalah repository dari aplikasi web Inventory dengan link -> https://tugas2p
    Setelah itu saya bermain dengan html dan css untuk waktu yang terlalu lama.
    
 2. 
+
    ![Bagan Penjelasan request response](BaganTugas2.PNG)
    
 3. Virtual environment digunakan dalam pengembangan aplikasi django untuk mempermudah pengerjaan kita karena kita menghilangkan masalah dari ketergantungan terhadap versi django dan requirements lain
