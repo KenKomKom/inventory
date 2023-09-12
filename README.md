@@ -3,19 +3,38 @@ inventory
 Ini adalah repository dari aplikasi web Inventory dengan link -> https://tugas2pbp-inventory.adaptable.app/main
 1. Pertama-tama saya membuat repository lokal bernama "UI/Sem3/pbp/tugas2".
    
-   Setelah itu saya menyalakan virtual environment dengan menjalankan command
-   ```python -m venv env```
+   Setelah itu saya menyalakan virtual environment dengan menjalankan command ```python -m venv env``` pada command prompt.
 
-   pada command prompt.
+   Kemudian membuat project dengan line ```django-admin startproject inventory``` di command prompt.
 
-   Kemudian membuat project dengan line
-  ```django-admin startproject inventory```
- di command prompt.
+   Setelah project sudah ada, saya lanjutkan dengan membuat app dengan command ```django-admin startapp main```
+   Saya menambahkan line
+   ```
+   from django.contrib import admin
+from django.urls import path, include
 
-   Setelah project sudah ada, saya lanjutkan dengan membuat app dengan command
-   ```django-admin startapp main```
-   Saya menambahkan line di file "urls.py" agar saat
-   client membuat request ke server, client bisa menjangkau app "main". Setelah itu saya membuat program "views.py" milik app untuk men-return template dan response berisi data dari model. Setelah itu
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('main', include('main.urls'))
+]
+```
+   di file "urls.py" agar saat client membuat request ke server, client bisa menjangkau app "main".
+
+Setelah itu saya memasukan line
+```
+from django.shortcuts import render
+from .models import Items
+
+# Create your views here.
+def show_cards(request):
+    all_card = Items.objects.all().values()
+    
+    response = {'cards': all_card}
+    print(all_card)
+    
+    return render(request, 'show_cards.html', response)
+```
+pada"views.py" milik app untuk men-return template dan response berisi data dari model. Setelah itu
    saya membuat class Vehicle di "models.py" milik app beserta dengan attribute class-nya.
    Saya pun menambahkan file initialize_item.json untuk membuat instansiasi dari main.Vehicle di-list dan menggunakan command "django-admin loaddata initialize_item" sehingga objek dari models
    terbentuk.
