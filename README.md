@@ -103,16 +103,20 @@ Ini adalah repository dari aplikasi web Inventory dengan link -> https://tugas2p
    reqest tersebut. Sedangkan untuk MVVM, model memiliki peran sumber data untuk aplikasi tersebut dan view adalah tampilan yang memiliki berbagai elemen, tetapi tiap fungsionalitas elemen diatur oleh
    viewmodel. Viewmodel sendiri berguna untuk mengatur semua data yang disalurkan ke view termasuk cara suatu elemen berinteraksi.
 
-5. Perbedaan dari form POST dan form GET adalah dari segi keamanan data. Jika sebuah form menggunakan method
+TUGAS2
+---
+1. Perbedaan dari form POST dan form GET adalah dari segi keamanan data. Jika sebuah form menggunakan method
    GET, data akan dapat terlihat di url bar, sedangkan jika form menggunakan method POST tidak dapat terlihat melalui url.
    Perbedaan lain dari POST dan GET adalah saat POST berhasil, akan terkirimkan kode 201 sedangkan GET akan mengirimkan 200.
-   Pengiriman data dengan GET juga berbeda dengan POST. GET akan menyimpan data dalam bentuk string sebelum disatukan dengan url, sedangkan form POST akan mengenkripsi data sebelum dikirim ke server.
-6. Perbedaan dari XML dan JSON ada beberapa hal. XML menggunakan Extensible Markup Language sedangkan JSON  
-   didasarkan pada JavaScript. JSON juga tidak bisa memiliki comment pada filenya tidak seperti XML. Data pada JSON disimpan dalam bentuk list of dictionary, sedangkan XML menggunakan struktur tag yang membentuk sebuah tree.
+   Pengiriman data dengan GET juga berbeda dengan POST. GET akan menyimpan data dalam bentuk string sebelum disatukan dengan url, sedangkan form POST akan mengenkripsi data
+   sebelumdikirim ke server.
+2. Perbedaan dari XML dan JSON ada beberapa hal. XML menggunakan Extensible Markup Language sedangkan JSON  
+   didasarkan pada JavaScript. JSON juga tidak bisa memiliki comment pada filenya tidak seperti XML. Data pada JSON disimpan dalam bentuk list of dictionary, sedangkan XML menggunakan
+   struktur tag yang membentuk sebuah tree.
    Sedangkan HTML berguna untuk menampilkan data-data tersebut pada webpage client.
-7. Alasan mengapa JSON lebih dipilih kebanding XML adalah ukuran file JSON yang lebih kecil karena   
+3. Alasan mengapa JSON lebih dipilih kebanding XML adalah ukuran file JSON yang lebih kecil karena   
    menggunakan karakter yang lebih sedikit. Syntax JSON yang lebih sederhana membuatnya lebih mudah untuk dibaca sehingga mendukung maintainability dan readbility. Kecepatan, ukuran,       inilah yang menyebabkan JSON lebih dipilih dalam pengiriman data dalam aplikasi web.
-8. Saya memulai dengan menambahkan file templates/skeleton.html pada root folder.
+4. Saya memulai dengan menambahkan file templates/skeleton.html pada root folder.
    Setelah itu saya mengganti main/templates/main.html menjadi extend templates/skeleton.html. Saya pun juga membuat add_vehicle.html yang juga mengextend skeleton.html dan berisikan
    ```html
    {% extends "skeleton.html" %}
@@ -203,7 +207,7 @@ Ini adalah repository dari aplikasi web Inventory dengan link -> https://tugas2p
        path('get-vehicles-xml/<int:id>-<int:id2>', get_vehicle_xml, name='get_vehicle_xml'),
        path('get-vehicles-json/<int:id>-<int:id2>', get_vehicle_json, name='get_vehicle_json'),
    ```
-9. Berikut adalah hasil dari postman
+5. Berikut adalah hasil dari postman
    
     ![Bagan HitHTML](imageJawaban/hitMain.PNG)
     ![Bagan Penjelasan request response](imageJawaban/hitAllJSON.PNG)
