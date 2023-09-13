@@ -102,3 +102,14 @@ Ini adalah repository dari aplikasi web Inventory dengan link -> https://tugas2p
    model memiliki peran yang sama, tetapi template pada MVT yang memliki peran lebih mirip dengan view pada MVC. View pada MVT berguna untuk menerima request dan membuat template yang sesuai dengan
    reqest tersebut. Sedangkan untuk MVVM, model memiliki peran sumber data untuk aplikasi tersebut dan view adalah tampilan yang memiliki berbagai elemen, tetapi tiap fungsionalitas elemen diatur oleh
    viewmodel. Viewmodel sendiri berguna untuk mengatur semua data yang disalurkan ke view termasuk cara suatu elemen berinteraksi.
+
+5. Perbedaan dari form POST dan form GET adalah dari segi keamanan data. Jika sebuah form menggunakan method
+   GET, data akan dapat terlihat di url bar, sedangkan jika form menggunakan method POST tidak dapat terlihat melalui url.
+   Perbedaan lain dari POST dan GET adalah saat POST berhasil, akan terkirimkan kode 201 sedangkan GET akan mengirimkan 200.
+   Pengiriman data dengan GET juga berbeda dengan POST. GET akan menyimpan data dalam bentuk string sebelum disatukan dengan url, sedangkan form POST akan mengenkripsi data sebelum dikirim ke server.
+6. Perbedaan dari XML dan JSON ada beberapa hal. XML menggunakan Extensible Markup Language sedangkan JSON  
+   didasarkan pada JavaScript. JSON juga tidak bisa memiliki comment pada filenya tidak seperti XML. Data pada JSON disimpan dalam bentuk list of dictionary, sedangkan XML menggunakan struktur tag yang membentuk sebuah tree.
+   Sedangkan HTML berguna untuk menampilkan data-data tersebut pada webpage client.
+7. Alasan mengapa JSON lebih dipilih kebanding XML adalah ukuran file JSON yang lebih kecil karena   
+   menggunakan karakter yang lebih sedikit. Syntax JSON yang lebih sederhana membuatnya lebih mudah untuk dibaca sehingga mendukung maintainability dan readbility. Kecepatan, ukuran, inilah yang menyebabkan JSON lebih dipilih dalam pengiriman data dalam aplikasi web.
+8. 

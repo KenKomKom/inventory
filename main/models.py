@@ -5,4 +5,4 @@ class Vehicle (models.Model):
     name = models.CharField(max_length=20)
     amount = models.IntegerField()
     description = models.TextField()
-    image_link = models.TextField(default="")
+    image_link = models.TextField(default="", blank=True)

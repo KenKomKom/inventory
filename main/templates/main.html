@@ -1,9 +1,7 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>We Want Vehicles</title>
-    </head>
-    <style>
+{% extends "skeleton.html" %}
+
+{% block content %}
+<style>
     body{
         margin: 0;
     }
@@ -107,6 +105,7 @@
         padding: 0px;
         width: 100%px;
         margin-top: 0px;
+        margin-bottom :3%;
     }
 
     .card{
@@ -133,7 +132,29 @@
         text-align: center;
         margin: 5px 0 5px 0;
     }
+    .cards button{
+        height : 50px;
+        width:120px;
+        border:0px;
+        border-radius : 10px;
+    }
+    footer{
+        display : flex;
+        flex-direction:row;
+        justify-content : space-around;
+        padding : 2%;
+        background-color:#F19A4D;
+    }
+    footer button{
+        height : 50px;
+        width:120px;
+        border:0px;
+        border-radius : 10px;
+    } 
     </style>
+    <head>
+        <title>We Want Vehicles</title>
+    </head>
     <body>
         <header>
             <div class="home">
@@ -153,6 +174,9 @@
         </div>
         <div class = "cards">
             <h1>VEHICLES</h1>
+            {% if not last_added == None  %}
+            <h2>Kamu Menyimpan {{last_added.amount}} {{last_added.name}} pada aplikasi ini</h2>
+            {% endif %}
             <div class = "container">
                 {% for v in vehicle %}
                 <div class="card">
@@ -164,6 +188,16 @@
                 </div>
                 {% endfor %}
             </div>
+            <a href = "{% url 'main:add_vehicle' %}">
+                <button>Add Vehicle</button>
+            </a>
         </div>
-    </body>
-</html>
+        <footer>
+            <a href = "{% url 'main:get_all_vehicle_json' %}">
+                <button>Vehicle all JSON</button>
+            </a>
+            <a href = "{% url 'main:get_all_vehicle_xml' %}">
+                <button>Vehicle all XML</button>
+            </a>
+        </footer>
+{% endblock content %}
