@@ -111,8 +111,99 @@ Ini adalah repository dari aplikasi web Inventory dengan link -> https://tugas2p
    didasarkan pada JavaScript. JSON juga tidak bisa memiliki comment pada filenya tidak seperti XML. Data pada JSON disimpan dalam bentuk list of dictionary, sedangkan XML menggunakan struktur tag yang membentuk sebuah tree.
    Sedangkan HTML berguna untuk menampilkan data-data tersebut pada webpage client.
 7. Alasan mengapa JSON lebih dipilih kebanding XML adalah ukuran file JSON yang lebih kecil karena   
-   menggunakan karakter yang lebih sedikit. Syntax JSON yang lebih sederhana membuatnya lebih mudah untuk dibaca sehingga mendukung maintainability dan readbility. Kecepatan, ukuran, inilah yang menyebabkan JSON lebih dipilih dalam pengiriman data dalam aplikasi web.
-8.  ![Bagan HitHTML](imageJawaban/hitMain.PNG)
+   menggunakan karakter yang lebih sedikit. Syntax JSON yang lebih sederhana membuatnya lebih mudah untuk dibaca sehingga mendukung maintainability dan readbility. Kecepatan, ukuran,       inilah yang menyebabkan JSON lebih dipilih dalam pengiriman data dalam aplikasi web.
+8. Saya memulai dengan menambahkan file templates/skeleton.html pada root folder.
+   Setelah itu saya mengganti main/templates/main.html menjadi extend templates/skeleton.html. Saya pun juga membuat add_vehicle.html yang juga mengextend skeleton.html dan berisikan
+   ```html
+   {% extends "skeleton.html" %}
+
+   {% block content %}
+   <h1>ADD VEHICLES</h1>
+
+   <form method="POST">
+       {% csrf_token %}
+       <table>
+           {{ form.as_table }}
+           <tr>
+               <td></td>
+               <td>
+                   <input type="submit" value="Add Product"/>
+               </td>
+           </tr>
+       </table>
+   </form>
+   {% endblock content %}
+   ```
+   Setelah itu saya membuat main/forms.py yang berisikan
+   ```python
+   from django.forms import ModelForm
+   from .models import Vehicle
+   
+   class VehicleForm(ModelForm):
+       class Meta : 
+           model = Vehicle
+           fields = ['name', 'amount', 'description', 'image_link']
+   ```
+   Setelah itu saya menambahkan berbagai function pada main/views.py
+   ```python
+   def add_vehicle(request):
+       form = VehicleForm(request.POST or None)
+   
+       print(reverse('main:main'))
+       if form.is_valid() and request.method == "POST":
+           form.save()
+           return HttpResponseRedirect(reverse('main:main'))
+       
+       response = {'form': form}
+       return render(request, "add_vehicle.html", response)
+   
+   def get_all_vehicle_json(request):
+       all_vehicles = Vehicle.objects.all()
+       return HttpResponse(serializers.serialize('json',all_vehicles), content_type="application/json")
+   
+   def get_all_vehicle_xml(request):
+       all_vehicles = Vehicle.objects.all()
+       return HttpResponse(serializers.serialize('xml',all_vehicles), content_type="application/xml")
+   
+   def get_vehicle_json(request,id,id2=-1):
+       if(id2!=-1):
+           all_vehicles = Vehicle.objects.all()
+           all_vehicles=list(all_vehicles)
+           temp=[]
+           for v in all_vehicles:
+               if id<= v.pk <=id2:
+                   temp+=[v]
+           return HttpResponse(serializers.serialize('json',temp), content_type="application/json")
+       else:
+           all_vehicles = Vehicle.objects.filter(pk=id)
+           return HttpResponse(serializers.serialize('json',all_vehicles), content_type="application/json")
+   
+   def get_vehicle_xml(request,id,id2=-1):
+       if(id2!=-1):
+           all_vehicles = Vehicle.objects.all()
+           all_vehicles=list(all_vehicles)
+           temp=[]
+           for v in all_vehicles:
+               if id<= v.pk <=id2:
+                   temp+=[v]
+           return HttpResponse(serializers.serialize('xml',temp), content_type="application/xml")
+       else:
+           all_vehicles = Vehicle.objects.filter(pk=id)
+           return HttpResponse(serializers.serialize('xml',all_vehicles), content_type="application/xml")
+   ```
+   Setelah function-function tersebut sudah dibuat, saya menambahkan path pada urls.py sehingga function-function tersebut dapat diakses dengan url yang tepat.
+   ```python
+       path('add-vehicle', add_vehicle, name='add_vehicle'),
+       path('all-vehicle-json', get_all_vehicle_json, name='get_all_vehicle_json'),
+       path('all-vehicle-xml', get_all_vehicle_xml, name='get_all_vehicle_xml'),
+       path('all-vehicles-json', get_all_vehicle_json, name='get_all_vehicle_json'),
+       path('all-vehicles-xml', get_all_vehicle_xml, name='get_all_vehicle_xml'),
+       path('get-vehicles-xml/<int:id>', get_vehicle_xml, name='get_one_vehicle_xml'),
+       path('get-vehicles-json/<int:id>', get_vehicle_json, name='get_one_vehicle_json'),
+       path('get-vehicles-xml/<int:id>-<int:id2>', get_vehicle_xml, name='get_vehicle_xml'),
+       path('get-vehicles-json/<int:id>-<int:id2>', get_vehicle_json, name='get_vehicle_json'),
+   ```
+10. ![Bagan HitHTML](imageJawaban/hitMain.PNG)
     ![Bagan Penjelasan request response](imageJawaban/hitAllJSON.PNG)
     ![Bagan Penjelasan request response](imageJawaban/hitAllXML.PNG)
     ![Bagan Penjelasan request response](imageJawaban/hit1XML.PNG)
