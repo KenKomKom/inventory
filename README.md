@@ -112,4 +112,8 @@ Ini adalah repository dari aplikasi web Inventory dengan link -> https://tugas2p
    Sedangkan HTML berguna untuk menampilkan data-data tersebut pada webpage client.
 7. Alasan mengapa JSON lebih dipilih kebanding XML adalah ukuran file JSON yang lebih kecil karena   
    menggunakan karakter yang lebih sedikit. Syntax JSON yang lebih sederhana membuatnya lebih mudah untuk dibaca sehingga mendukung maintainability dan readbility. Kecepatan, ukuran, inilah yang menyebabkan JSON lebih dipilih dalam pengiriman data dalam aplikasi web.
-8. 
+8.  ![Bagan HitHTML](imageJawaban/hitMain.PNG)
+    ![Bagan Penjelasan request response](imageJawaban/hitAllJSON.PNG)
+    ![Bagan Penjelasan request response](imageJawaban/hitAllXML.PNG)
+    ![Bagan Penjelasan request response](imageJawaban/hit1XML.PNG)
+    ![Bagan Penjelasan request response](imageJawaban/hit1JSON.PNG)
