@@ -76,7 +76,7 @@ Ini adalah repository dari aplikasi web Inventory dengan link -> https://tugas2p
    
 2. 
 
-   ![Bagan Penjelasan request response](BaganTugas2.PNG)
+   ![Bagan Penjelasan request response](imageJawaban/BaganTugas2.PNG)
    
 3. Virtual environment digunakan dalam pengembangan aplikasi django untuk mempermudah pengerjaan kita karena kita menghilangkan masalah dari ketergantungan terhadap versi django dan requirements lain
    yang diperlukan untuk program berjalan. Dengan kita membuat virtual environment, segala requirements yang kita download hanya berpengaruh di environment tersebut misalkan jika mengerjakan berbagai
