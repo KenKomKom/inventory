@@ -203,7 +203,7 @@ Ini adalah repository dari aplikasi web Inventory dengan link -> https://tugas2p
        path('get-vehicles-xml/<int:id>-<int:id2>', get_vehicle_xml, name='get_vehicle_xml'),
        path('get-vehicles-json/<int:id>-<int:id2>', get_vehicle_json, name='get_vehicle_json'),
    ```
-10. ![Bagan HitHTML](imageJawaban/hitMain.PNG)
+9. ![Bagan HitHTML](imageJawaban/hitMain.PNG)
     ![Bagan Penjelasan request response](imageJawaban/hitAllJSON.PNG)
     ![Bagan Penjelasan request response](imageJawaban/hitAllXML.PNG)
     ![Bagan Penjelasan request response](imageJawaban/hit1XML.PNG)
