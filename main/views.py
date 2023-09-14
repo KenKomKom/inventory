@@ -11,11 +11,8 @@ def main(request):
     response = {'name':'KenichiKomala','class': 'PBP D'}
     all_vehicle = Vehicle.objects.all().values()
     all_vehicle=list(all_vehicle)
-    if(len(all_vehicle)!=0):
-        last_added = all_vehicle[-1]
-    else:
-        last_added=None
-    response['last_added']=last_added
+
+    response['length']=len(all_vehicle)
     response['vehicle']= all_vehicle
     print(all_vehicle)
     

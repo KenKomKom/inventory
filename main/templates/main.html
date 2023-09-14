@@ -174,9 +174,7 @@
         </div>
         <div class = "cards">
             <h1>VEHICLES</h1>
-            {% if not last_added == None  %}
-            <h2>Kamu Menyimpan {{last_added.amount}} {{last_added.name}} pada aplikasi ini</h2>
-            {% endif %}
+            <h2>Terdapat {{length}} item pada aplikasi ini</h2>
             <div class = "container">
                 {% for v in vehicle %}
                 <div class="card">
