@@ -21,7 +21,7 @@ def main(request):
 def add_vehicle(request):
     form = VehicleForm(request.POST or None)
 
-    print(reverse('main:main'))
+    print("reversed: "+reverse('main:main'))
     if form.is_valid() and request.method == "POST":
         form.save()
         return HttpResponseRedirect(reverse('main:main'))
