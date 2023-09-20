@@ -2,6 +2,7 @@
 
 {% block content %}
 <style>
+
     body{
         margin: 0;
     }
@@ -32,7 +33,9 @@
         font-size: 48px;
         font-weight: 600;
     }
-
+    .home .session{
+        font-size:24px;
+    }
     .navbar{
         display: flex;
         flex-direction: column;
@@ -160,6 +163,7 @@
             <div class="home">
                 <h1>We Want<br/><span class="red">Vehicles</span></h1>
                 <p>Vehicle database</p>
+                <p class="session">session : {{session}}</p>
             </div>
         </header>
         <div class="navbar">
@@ -189,6 +193,7 @@
             <a href = "{% url 'main:add_vehicle' %}">
                 <button>Add Vehicle</button>
             </a>
+            <a href ="{% url 'main:logout' %}"><button>Log Out</button></a>
         </div>
         <footer>
             <a href = "{% url 'main:get_all_vehicle_json' %}">

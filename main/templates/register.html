@@ -1,0 +1,50 @@
+{% extends "skeleton.html" %}
+{% block meta %}
+    <title>Register</title>
+{% endblock meta %}
+
+{% block content %}
+<style>
+    h1{
+        color:white;
+        font-size:300%;
+    }
+    .container{
+        font-family: Arial,'Montserrat', Helvetica, sans-serif;
+        margin:5%;
+        display : flex;
+        flex-direction: column;
+        align-items:center;
+        background-color:#43B972;
+        padding:20px;
+        border-radius:50px;
+    }
+    .submit{
+        border-radius:4%;
+        padding:1% 5% 1% 5%;
+        border:0px;
+        background-color:#213150;
+        color:antiquewhite;
+    }
+
+    input{
+        border-radius:5%;
+    }
+
+    body{
+        background:antiquewhite;
+    }
+
+</style>
+    <div class = "container">
+        <h1> Register </h1>
+            <form  method="POST" class="form">
+            {% csrf_token %}
+            {{form.as_p}}
+            <input type = "submit" value="Register" class="submit" name="submit">
+            </form>
+        {% for m in messages %}
+            <p>{{m}}</p>
+        {% endfor %}
+    </div>
+{% endblock content %}

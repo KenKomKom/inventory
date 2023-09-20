@@ -1,4 +1,7 @@
-inventory
+# INVENTORY
+
+
+TUGAS2
 ---
 Ini adalah repository dari aplikasi web Inventory dengan link -> https://tugas2pbp-inventory.adaptable.app/main
 1. Pertama-tama saya membuat repository lokal bernama "UI/Sem3/pbp/tugas2".
@@ -103,7 +106,7 @@ Ini adalah repository dari aplikasi web Inventory dengan link -> https://tugas2p
    reqest tersebut. Sedangkan untuk MVVM, model memiliki peran sumber data untuk aplikasi tersebut dan view adalah tampilan yang memiliki berbagai elemen, tetapi tiap fungsionalitas elemen diatur oleh
    viewmodel. Viewmodel sendiri berguna untuk mengatur semua data yang disalurkan ke view termasuk cara suatu elemen berinteraksi.
 
-TUGAS2
+TUGAS3
 ---
 1. Perbedaan dari form POST dan form GET adalah dari segi keamanan data. Jika sebuah form menggunakan method
    GET, data akan dapat terlihat di url bar, sedangkan jika form menggunakan method POST tidak dapat terlihat melalui url.
@@ -214,3 +217,211 @@ TUGAS2
     ![Bagan Penjelasan request response](imageJawaban/hitAllXML.PNG)
     ![Bagan Penjelasan request response](imageJawaban/hit1XML.PNG)
     ![Bagan Penjelasan request response](imageJawaban/hit1JSON.PNG)
+
+TUGAS4
+---
+1. Apa itu Django UserCreationForm, dan jelaskan apa kelebihan dan kekurangannya?
+    UserCreationForm dari ```django.contrib.auth.forms``` adalah class yang disediakan oleh django bagi developer agar bisa langsung membuat form registrasi user yang inherit models.ModelForm secara tidak langsung melalui penurunan dari class BaseUserForm. Field yang diberikan oleh UserCreationForm adalah username dan juga password.
+    Kekurangan dari penggunaan UserCreationForm untuk membuat form adalah keterbatasan dari fields yang dapat digunakan. Jika misal kita memerlukan user untuk memasukan email, UserCreationForm tidak bisa digunakan. Kita perlu mendefinisikan form sendiri sesuai dengan yang kita inginkan.
+2. Apa perbedaan antara autentikasi dan otorisasi dalam konteks Django, dan mengapa keduanya penting?
+    Autentikasi pada django adalah sistem yang django sediakan seperti ```django.contrib.auth.authenticate``` untuk memastikan keberadaan user pada database user yang tersedia dan apakah info seperti passwordnya sesuai.
+    Otorisasi adalah fasilitas yang django berikan untuk menentukan apa yang bisa dilakukan oleh user yang telah diautentikasi.
+3. Apa itu cookies dalam konteks aplikasi web, dan bagaimana Django menggunakan cookies untuk mengelola data sesi pengguna?
+    Cookies dalam aplikasi web adalah data yang memuat informasi mengenai user yang telah mengakses sebuah aplikasi web. Fungsi dari cookies adalah untuk mempermudah user yang telah diautentikasi dan otorisasi ke dalam sebuah aplikasi web. Dengan adanya cookies pada sebuah aplikasi, aplikasi tersebut dapat menampilkan kembali preferensi yang dimiliki user tersebut seperti bahasa yang digunakan, atau pada sistem e-commerce, aplikasi tersebut bisa memberikan sugesti berdasarkan produk yang anda liat pada session sebelumnya.
+    Cookies pada django juga berfungsi sama. Cookies pada django diimplementasikan menggunakan struktur data dictionary sehingga untuk membuat informasi baru pada cookies milik user, diperlukan method pada response, ```.set_cookie(key, value)```, yang bisa diakses saat request dengan ```request.COOKIES['key']``` pada saat user melakukan request.
+4. Apakah penggunaan cookies aman secara default dalam pengembangan web, atau apakah ada risiko potensial yang harus diwaspadai?
+    Cookies pada umumnya aman untuk digunakan karena mereka dibuat untuk memfasilitasi user dalam penggunaan aplikasi web tersebut agar pengalaman user menjadi lebih nyaman saat menggunakan aplikasi tersebut. Namun, jika suatu aplikasi rentan terhadap serangan, cookies yang berisi informasi kita bisa dimanfaatkan oleh penyerang. Selain itu, beberapa pihak ketiga bekerja sama dengan berbagai aplikasi web dan mendapatkan informasi dari cookies-cookies tersebut sehingga mereka bisa mendapatkan informasi yang banyak mengenai aktivitas digital dan preferensi kita di internet.
+5. Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial).
+    Jadi pada awalnya, saya mengimport
+    ```python
+    from django.contrib.auth.decorators import login_required
+    from django.contrib.auth.forms import UserCreationForm
+    from django.contrib.auth import login, authenticate, logout
+    from django.contrib import messages
+    ```
+    pada ../main/views.py. Lalu menambahkan function-function untuk memfasilitasi registrasi, login dan logout.
+    ```python
+    def login_user(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        
+        user = authenticate(request, username=username, password=password)
+
+        if user is not None:
+            login(request, user)
+            response = HttpResponseRedirect(reverse('main:main'))
+            response.set_cookie('last_login', str(datetime.datetime.now()))
+            return response
+        else:
+            messages.info(request,'fail to login')
+    return render(request, 'login.html', {})
+
+    def register(request):
+        # form = UserCreationForm()
+        form = UserCreationForm(request.POST)
+
+        # if form.method == 'POST':
+            # form = form = UserCreationForm(request.POST)
+
+            # if form.is_valid():
+        if form.is_valid() and request.method == 'POST':
+
+            form.save()
+            
+            response = HttpResponseRedirect(reverse('main:login'))
+            messages.success(request, 'YEY!')
+
+            response.set_cookie('last_login', str(datetime.datetime.now()))
+
+            return response
+        
+        response = {'form':form}
+        return render (request, 'register.html',response)
+
+    def logout_user(request):
+        logout(request)
+        response = HttpResponseRedirect(reverse('main:login'))
+        response.delete_cookie('last_login')
+        return response
+    ```
+
+    selain itu, saya juga mengubah function main dengan menambahkan
+    ```python
+    response = {'name':request.user.username,'class': 'PBP D'}
+    all_vehicle = Vehicle.objects.filter(user = request.user)
+    ...
+    response['session']=request.COOKIES['last_login']
+    ```
+
+    pada function add_vehicle(request) juga ada perubahan kode, yaitu
+    ```python
+    vehicle = form.save(commit=False)
+    vehicle.user = request.user
+    ```
+    untuk menyimpan informasi user yang memasukan objek tersebut.
+
+    Pada ../main/urls.py diperlukan ditambahkan
+    ```python
+    path('login/', login_user, name='login'),
+    path('logout/', logout_user, name='logout'),
+    path('register/', register, name='register'),
+    ```
+    agar saat urls tersebut dimasukkan oleh user dapat diberikan response yang tepat.
+
+    Pada ../main/models.py ditambahkan 1 line untuk menyimpan informasi user yang mendaftarkan objek
+    ```python
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    ```
+
+    Setelah itu semua, perlu dipersiapkan templates html untuk di-render saat user membuat request registrasi/login/logout. Jadi dibuat file login.html yang berisi
+    ```html
+    {% extends "skeleton.html" %}
+    {% block meta %}
+        <title>Login</title>
+    {% endblock meta %}
+
+    {% block content %}
+        <div class = "login">
+
+            <h1>Login</h1>
+
+            <form method="POST" action="">
+                {% csrf_token %}
+                <table>
+                    <tr>
+                        <td>Username: </td>
+                        <td><input type="text" name="username" placeholder="Username" class="form-control"></td>
+                    </tr>
+                            
+                    <tr>
+                        <td>Password: </td>
+                        <td><input type="password" name="password" placeholder="Password" class="form-control"></td>
+                    </tr>
+
+                    <tr>
+                        <td></td>
+                        <td><input class="btn login_btn" type="submit" value="Login"></td>
+                    </tr>
+                </table>
+            </form>
+
+            {% if messages %}
+                <ul>
+                    {% for message in messages %}
+                        <li>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}     
+                
+            Don't have an account yet? <a href="{% url 'main:register' %}">Register Now</a>
+
+        </div>
+
+    {% endblock content %}
+    ```
+    , file register.html yang berisikan
+    ```html
+    {% extends "skeleton.html" %}
+    {% block meta %}
+        <title>Register</title>
+    {% endblock meta %}
+
+    {% block content %}
+    <style>
+        h1{
+            color:white;
+            font-size:300%;
+        }
+        .container{
+            font-family: Arial,'Montserrat', Helvetica, sans-serif;
+            margin:5%;
+            display : flex;
+            flex-direction: column;
+            align-items:center;
+            background-color:#43B972;
+            padding:20px;
+            border-radius:50px;
+        }
+        .submit{
+            border-radius:4%;
+            padding:1% 5% 1% 5%;
+            border:0px;
+            background-color:#213150;
+            color:antiquewhite;
+        }
+
+        input{
+            border-radius:5%;
+        }
+
+        body{
+            background:antiquewhite;
+        }
+
+    </style>
+        <div class = "container">
+            <h1> Register </h1>
+                <form  method="POST" class="form">
+                {% csrf_token %}
+                {{form.as_p}}
+                <input type = "submit" value="Register" class="submit" name="submit">
+                </form>
+            {% for m in messages %}
+                <p>{{m}}</p>
+            {% endfor %}
+        </div>
+    {% endblock content %}
+    ```
+    , dan terakhir pada main.html ditambahakn line agar diketahui informasi mengenai sessionya.
+    ```html
+    ...
+    <header>
+        <div class="home">
+            <h1>We Want<br/><span class="red">Vehicles</span></h1>
+            <p>Vehicle database</p>
+            <p class="session">session : {{session}}</p>
+        </div>
+    </header>
+    ...
+    ```
