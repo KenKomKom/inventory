@@ -8,3 +8,4 @@ class Vehicle (models.Model):
     amount = models.IntegerField()
     description = models.TextField()
     image_link = models.TextField(default="", blank=True)
+    
