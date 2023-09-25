@@ -116,3 +116,19 @@ def get_vehicle_xml(request,id,id2=-1):
     else:
         all_vehicles = Vehicle.objects.filter(pk=id)
         return HttpResponse(serializers.serialize('xml',all_vehicles), content_type="application/xml")
+    
+def decrease_amount(request, id):
+    temp = Vehicle.objects.get(id=id)
+    if(temp.amount>0):
+        temp.update_amount(temp.amount-1)
+    return HttpResponseRedirect(reverse("main:main"))
+
+def increase_amount(request, id):
+    temp = Vehicle.objects.get(id=id)
+    temp.update_amount(temp.amount+1)
+    return HttpResponseRedirect(reverse("main:main"))
+
+def delete_this_item(request, id):
+    temp = Vehicle.objects.get(id=id)
+    temp.delete()
+    return HttpResponseRedirect(reverse("main:main"))

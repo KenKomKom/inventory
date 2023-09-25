@@ -184,9 +184,19 @@
                 <div class="card">
                     <p id="cardname">{{v.name}}</p>
                     <img src={{v.image_link}} alt="{{v.name}}">
+                    <a href = "{% url 'main:decrease_amount' v.id %}">
+                        <button>-</button>
+                    </a>
                     <p>Amount : {{v.amount}}</p>
+                    <a href = "{% url 'main:increase_amount' v.id %}">
+                        <button>+</button>
+                    </a>
                     <p>{{v.description}}</p>
                     <br/>
+                    <a href = "{% url 'main:delete' v.id %}">
+                        <button>delete</button>
+                    </a>
+                    
                 </div>
                 {% endfor %}
             </div>

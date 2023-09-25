@@ -8,4 +8,8 @@ class Vehicle (models.Model):
     amount = models.IntegerField()
     description = models.TextField()
     image_link = models.TextField(default="", blank=True)
+
+    def update_amount(self, new_amount):
+        self.amount=new_amount
+        self.save()
     

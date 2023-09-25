@@ -17,4 +17,7 @@ urlpatterns = [
     path('get-vehicles-json/<int:id>/', get_vehicle_json, name='get_one_vehicle_json'),
     path('get-vehicles-xml/<int:id>-<int:id2>/', get_vehicle_xml, name='get_vehicle_xml'),
     path('get-vehicles-json/<int:id>-<int:id2>/', get_vehicle_json, name='get_vehicle_json'),
+    path('decrease_amount/<int:id>', decrease_amount, name='decrease_amount'),
+    path('increase_amount/<int:id>', increase_amount, name='increase_amount'),
+    path('delete/<int:id>',delete_this_item, name="delete"),
 ]
