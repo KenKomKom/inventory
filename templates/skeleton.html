@@ -11,6 +11,61 @@
         {% endblock meta %}
     </head>
     <body>
+        <style>
+            .navbar{
+                display: flex;
+                flex-direction: column;
+                justify-content: space-around;
+                align-items: center;
+                
+                position: sticky;
+                top:0;
+        
+                background-color: antiquewhite;
+                font-family: Arial,'Montserrat', Helvetica, sans-serif;
+                padding:0% 0% 0% 0%;
+                margin:0%;
+            }
+        
+            .navbar #topnav{
+                display: flex;
+                flex-direction: row;
+                justify-content: space-around;
+                background-color: #F19A4D;
+                width: 100%;
+                padding-top: 1%;
+                padding-bottom: 1%;
+            }
+            .navbar #botnav{
+                display: flex;
+                flex-direction: row;
+                justify-content: space-around;
+                width: 100%;
+            }
+        
+            .navbar #navbarTitle{
+                font-weight: 700;
+                font-size: 28px;
+                color: antiquewhite;
+                text-decoration: none;
+            }
+            .navbar #navbarAbout{
+                margin: 0px;
+                position: sticky;
+                top: 0;
+                font-size: 24px;
+                font-weight: 400;
+                color: antiquewhite;
+            }
+        </style>
+        <div class="navbar">
+            <div id="topnav">
+                <a href = "" id="navbarTitle">We Want Vehicles</span></a>
+                <p id="navbarAbout">About Us</p>
+            </div>
+            <div id ="botnav">
+            </div>
+        </div>
         {% block content %}
         {% endblock content %}
     </body>

@@ -425,3 +425,171 @@ TUGAS4
     </header>
     ...
     ```
+
+TUGAS 5
+---
+1. Terdapat tiga jenis selector dalam CSS. Pertama adalah selector elemen, kedua adalah selector id, dan
+terakhir adalah selector class.
+Selector elemen dituliskan dengan menuliskan tag html yang ingin diformat dan menuliskan properti css yang diingikan didalam kurung kurawal {}. Misal,
+    ```html
+    <style>
+        p {
+            color:#FFFFFF;
+            font-family:Arial;
+            padding:100px;
+            ...
+        }
+    </style>
+    ```
+    Selector tersebut cocok untuk digunakan jika kita ingin membuat semua tag yang sama pada dokumen htmlnya menjadi memiliki properti css yang dituliskan. Seperti misal dengan contoh diatas, semua elemen paragraf akan berubah menjadi warna putih, font arial, dan memiliki padding 100px.
+    Misal pada suatu website kita mau semua tulisan kita menggunakan font arial maka kita tulis dengan
+    ```html
+    <style>
+        p, h1, h2, h3{
+            font-family:Arial;
+        }
+    </style>
+    ```
+    Untuk jenis kedua yaitu, id selector cocok digunakan ketika kita ingin mengubah hanya satu elemen pada dokumen kita atau misal pada website kita memang hanya memiliki satu elemen tersebut seperti sebuah navigation bar. Suatu id hanya bisa dimiliki oleh satu elemen html sehingga cocok jika kita ingin memberikan properti padanya dengan menggunakan id selector. Misal
+    ```html
+    <style>
+        #navbar{
+            display:flex;
+            flex-direction:row;
+            justify-content:space-between;
+            align-items:center;
+        }
+    </style>
+    <body>
+        <div id = "navbar">
+            <h1>judul</h1>
+            <p>contact</p>
+        </div>
+    </body>
+    ```
+    Kita juga bisa mengakses elemen di dalam sebuah id baik tag biasa, id lain atau class dengan menuliskannya disebelah idnya, seperti:
+     ```html
+    <style>
+        ...
+        #navbar h1{
+            font-family:Arial;
+            color:antiquewhite;
+        }
+    </style>
+    <body>
+        <div id = "navbar">
+            <h1>judul</h1>
+            <p>contact</p>
+        </div>
+    </body>
+    ```
+    Yang ketiga adalah class selector yang cocok digunakan jika kita memiliki beberapa bagian dalam satu dokumen html yang perlu memiliki property sama. Misal kan kita memiliki forum dan kolom komentar yang memiliki properti serupa, maka kita bisa menggunakan class.
+    ```html
+    <style>
+        chats{
+            padding:0px;
+            margin:0px;
+            box-sizing:border-box;
+        }
+    </style>
+    <body>
+        <div class="chats">
+            <h1>Forum</h1>
+        </div>
+        <div class="kolomKomentar">
+            <h1>Kolom Komentar</h1>
+        </div>
+    </body>
+    ```
+    Kita juga bisa mengakses elemen di dalam sebuah class layaknya dengan selector id dengan cara yang sama.
+2. Saat pertama kali mengetik html kita selalu memulainya dengan \<html\>\</html\> yang berfungsi sebagai 
+   root dari semua elemen pada dokumen dan menjadi penampung semua elemen.
+   Setelah itu ada tag \<head\> yang berfungsi untuk memberikan informasi mengenai website seperti judulnya, dan data meta nya.
+   
+   Setelah itu ada tag \<body\> yaitu tag yang menampung elemn yang akan muncul pada website.  
+   Tag header memiliki banyak jenis, h1,h2,h3,h4,h5,h6 yang berfungsi untuk menampilkan font dengan ukuran 
+   yang lebih besar dan lebih tebal. Semakin kecil angkanya semakin besar ukurannya. Misalkan,
+   \<h1\>"JUDUL"\<h1\> akan menampilkan 
+
+   <h1>"JUDUL"</h1>
+
+   Selanjutnya ada tag \<p\> atau paragraf yang berfungsi untuk menampilkan teks biasa.
+   
+   Tag \<div\> berguna untuk mengelompokan berbagai elemen menjadi satu kelompok sehingga untuk dimanipulasi dengan css lebih mudah.
+   
+   Tag \<input\> berfungsi untuk membuat input field yang dapat berupa text field pendek, panjang, button, radio, dll. Tag input biasa digunakan dalam tag \<form\> sehingga data yang dimasukan ke form dapat diambil dan dikirimkan ke server.
+   
+   Terdapat juga tag \<a\> yang berguna untuk menampilkan link. Misalkan \<a href="https://os.vlsm.org/"\> link \</a\> akan menampilkan 
+   
+   <a href="https://os.vlsm.org/">link</a>
+
+   dan tag  \<img\>
+   
+   <img src="https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.dictionary.com%2Fe%2Fslang%2Fchungus%2F&psig=AOvVaw0TNPgUC9MovzmZU-rMBaNQ&ust=1695905620880000&source=images&cd=vfe&opi=89978449&ved=0CBAQjRxqFwoTCJC7v_TqyoEDFQAAAAAdAAAAABAD" alt="big chungus">
+
+   yang beguna untuk menampilkan gambar
+
+3. Perbedaan dari margin dan padding adalah margin merupakan area diluar dari border suatu elemen yang bersifat kosong, sedangkan padding merupakan bagian didalam border elemen.
+    
+    Contoh elemen id a dan id b yang memiliki margin dan padding 0
+    <h2 id="a">a</h2>
+    <h2 id="b">b</h2>
+    <style>
+    #a{
+        background-color:red;
+        padding-bottom:0px;
+        padding-top:0px;
+        margin-top:0px;
+        margin-bottom:0px;
+    }
+    #b{
+        background-color:blue;
+        padding-bottom:0px;
+        padding-top:0px;
+        margin-top:0px;
+        margin-bottom:0px;
+    }
+    </style>
+
+    Contoh elemen id a memiliki margin 30px dan padding 0px id dan b uang memiliki margin dan padding 0
+    <h2 id="c">a</h2>
+    <h2 id="d">b</h2>
+    <style>
+    #c{
+        background-color:red;
+        padding-bottom:0px;
+        padding-top:0px;
+        margin-top:30px;
+        margin-bottom:30px;
+    }
+    #d{
+        background-color:blue;
+        padding-bottom:0px;
+        padding-top:0px;
+        margin-top:0px;
+        margin-bottom:0px;
+    }
+    </style>
+
+    Contoh elemen id a memiliki margin 0px dan padding 30px id dan b uang memiliki margin dan padding 0
+    <h2 id="e">a</h2>
+    <h2 id="f">b</h2>
+    <style>
+    #e{
+        background-color:red;
+        padding-bottom:30px;
+        padding-top:30px;
+        margin-top:0px;
+        margin-bottom:0px;
+    }
+    #f{
+        background-color:blue;
+        padding-bottom:0px;
+        padding-top:0px;
+        margin-top:0px;
+        margin-bottom:0px;
+    }
+    </style>
+
+4. Perbedaan tailwind dan bootstrap adalah bootstrap memberikan komponen dan class css yang telah dirancang sebelumnya sehingga bisa langsung digunakan di dalam aplikasi web, misalkan button, text dan lain-lain. File bootstrap cenderung besar akibat ini karena bootstrap menyediakan berbagai macam komponen siap pakai. Namun, karena hal tersebut bootstrap menjadi lebih susah untuk berkreativitas karena css milik komponen bootstrap tidak bisa kita edit secara lokal.
+   Sedangkan untuk tailwindcss memberikan kelas-kelas utilitas yang dapat kita gunakan sendiri untuk membuat komponen yang kita inginkan. Karena tailwindcss hanya menyediakan alat utilitas, maka cenderung ukurannya lebih kecil dari bootstrap. Namun, karena hal ini juga pembelajaran akan tailwind lebih sulit kebanding bootstrap yang hanya tinggal digunakan.
