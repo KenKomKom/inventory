@@ -529,67 +529,16 @@ Selector elemen dituliskan dengan menuliskan tag html yang ingin diformat dan me
 
    yang beguna untuk menampilkan gambar
 
-3. Perbedaan dari margin dan padding adalah margin merupakan area diluar dari border suatu elemen yang bersifat kosong, sedangkan padding merupakan bagian didalam border elemen.
+3. Perbedaan dari margin dan padding adalah margin merupakan area diluar dari border suatu elemen yang bersifat kosong, sedangkan padding merupakan bagian didalam border elemen. Margin dapat dibayangkan sebagai jarak satu elemen ke elemen lain.
     
     Contoh elemen id a dan id b yang memiliki margin dan padding 0
-    <h2 id="a">a</h2>
-    <h2 id="b">b</h2>
-    <style>
-    #a{
-        background-color:red;
-        padding-bottom:0px;
-        padding-top:0px;
-        margin-top:0px;
-        margin-bottom:0px;
-    }
-    #b{
-        background-color:blue;
-        padding-bottom:0px;
-        padding-top:0px;
-        margin-top:0px;
-        margin-bottom:0px;
-    }
-    </style>
+    ![Bagan 0margin0padding](imageJawaban/0marginpadding.PNG)
 
     Contoh elemen id a memiliki margin 30px dan padding 0px id dan b uang memiliki margin dan padding 0
-    <h2 id="c">a</h2>
-    <h2 id="d">b</h2>
-    <style>
-    #c{
-        background-color:red;
-        padding-bottom:0px;
-        padding-top:0px;
-        margin-top:30px;
-        margin-bottom:30px;
-    }
-    #d{
-        background-color:blue;
-        padding-bottom:0px;
-        padding-top:0px;
-        margin-top:0px;
-        margin-bottom:0px;
-    }
-    </style>
+    ![Bagan 30margin0padding](imageJawaban/30margin0padding.PNG)
 
     Contoh elemen id a memiliki margin 0px dan padding 30px id dan b uang memiliki margin dan padding 0
-    <h2 id="e">a</h2>
-    <h2 id="f">b</h2>
-    <style>
-    #e{
-        background-color:red;
-        padding-bottom:30px;
-        padding-top:30px;
-        margin-top:0px;
-        margin-bottom:0px;
-    }
-    #f{
-        background-color:blue;
-        padding-bottom:0px;
-        padding-top:0px;
-        margin-top:0px;
-        margin-bottom:0px;
-    }
-    </style>
+    ![Bagan 0margin30padding](imageJawaban/30padding0margin.PNG)
 
 4. Perbedaan tailwind dan bootstrap adalah bootstrap memberikan komponen dan class css yang telah dirancang sebelumnya sehingga bisa langsung digunakan di dalam aplikasi web, misalkan button, text dan lain-lain. File bootstrap cenderung besar akibat ini karena bootstrap menyediakan berbagai macam komponen siap pakai. Namun, karena hal tersebut bootstrap menjadi lebih susah untuk berkreativitas karena css milik komponen bootstrap tidak bisa kita edit secara lokal.
    Sedangkan untuk tailwindcss memberikan kelas-kelas utilitas yang dapat kita gunakan sendiri untuk membuat komponen yang kita inginkan. Karena tailwindcss hanya menyediakan alat utilitas, maka cenderung ukurannya lebih kecil dari bootstrap. Namun, karena hal ini juga pembelajaran akan tailwind lebih sulit kebanding bootstrap yang hanya tinggal digunakan.
