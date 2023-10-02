@@ -1,4 +1,4 @@
-{% load static %}
+{% load static%}
 <!DOCTYPE html>
 <html>
     <head>
@@ -7,11 +7,10 @@
             name="viewport"
             content="width=device-width, initial-scale=1.0"
         />
-        {% block meta %}
-        {% endblock meta %}
-    </head>
-    <body>
         <style>
+            body{
+                margin:0;
+            }
             .navbar{
                 display: flex;
                 flex-direction: column;
@@ -58,6 +57,11 @@
                 color: antiquewhite;
             }
         </style>
+        {% block meta %}
+        {% endblock meta %}
+    </head>
+    <body>
+        
         <div class="navbar">
             <div id="topnav">
                 <a href = "" id="navbarTitle">We Want Vehicles</span></a>

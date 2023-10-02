@@ -1,12 +1,17 @@
 {% extends "skeleton.html" %}
+{% load static %}
 {% block meta %}
     <title>Login</title>
+    <link rel="stylesheet" href="{% static 'test.css' %}"/>
 {% endblock meta %}
 
 {% block content %}
-    <style>
+    {% comment %} <style>
         .login{
             background-color:#EEEEEE;
+            width:40%;
+            margin:20px;
+            padding:5px 10px 20px 10px;
         }
         body{
             background-color:#FCFBFB;
@@ -14,7 +19,7 @@
         form{
             color:#071E22;
         }
-    </style>
+    </style> {% endcomment %}
     <div class = "login">
 
         <h1>Login</h1>

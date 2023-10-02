@@ -1,6 +1,5 @@
 {% extends "skeleton.html" %}
-
-{% block content %}
+{% block meta %}
 <style>
 
     body{
@@ -135,6 +134,18 @@
         text-align: center;
         margin: 5px 0 5px 0;
     }
+    .cardlast #cardname{
+        font-size: 28px;
+        font-weight: 700;
+        margin-bottom: 2%;
+    }
+    .cardlast p{
+        font-family: Arial,'Montserrat', Helvetica, sans-serif;
+        font-weight: 500;
+        color: antiquewhite;
+        text-align: center;
+        margin: 5px 0 5px 0;
+    }
     .cards button{
         height : 50px;
         width:120px;
@@ -154,10 +165,25 @@
         border:0px;
         border-radius : 10px;
     } 
+    .cardlast{
+        box-sizing: border-box;
+        display: flex;
+        background-color: #AABBCC;
+        width: 200px;
+        height: 300px;
+        justify-content: center;
+        align-items: center;
+        border-radius: 5%;
+        flex-direction: column;
+        box-shadow:inset;
+    }
     </style>
-    <head>
-        <title>We Want Vehicles</title>
-    </head>
+
+    <title>We Want Vehicles</title>
+
+{% endblock meta %}
+{% block content %}
+
     <body>
         <header>
             <div class="home">
@@ -181,23 +207,43 @@
             <h2>Terdapat {{length}} item pada aplikasi ini</h2>
             <div class = "container">
                 {% for v in vehicle %}
-                <div class="card">
-                    <p id="cardname">{{v.name}}</p>
-                    <img src={{v.image_link}} alt="{{v.name}}">
-                    <a href = "{% url 'main:decrease_amount' v.id %}">
-                        <button>-</button>
-                    </a>
-                    <p>Amount : {{v.amount}}</p>
-                    <a href = "{% url 'main:increase_amount' v.id %}">
-                        <button>+</button>
-                    </a>
-                    <p>{{v.description}}</p>
-                    <br/>
-                    <a href = "{% url 'main:delete' v.id %}">
-                        <button>delete</button>
-                    </a>
-                    
-                </div>
+                    {% if forloop.last %}
+                    <div class="cardlast">
+                        <p id="cardname">{{v.name}}</p>
+                        <img src={{v.image_link}} alt="{{v.name}}">
+                        <a href = "{% url 'main:decrease_amount' v.id %}">
+                            <button>-</button>
+                        </a>
+                        <p>Amount : {{v.amount}}</p>
+                        <a href = "{% url 'main:increase_amount' v.id %}">
+                            <button>+</button>
+                        </a>
+                        <p>{{v.description}}</p>
+                        <br/>
+                        <a href = "{% url 'main:delete' v.id %}">
+                            <button>delete</button>
+                        </a>
+                        
+                    </div>
+                    {% else %}
+                    <div class="card">
+                        <p id="cardname">{{v.name}}</p>
+                        <img src={{v.image_link}} alt="{{v.name}}">
+                        <a href = "{% url 'main:decrease_amount' v.id %}">
+                            <button>-</button>
+                        </a>
+                        <p>Amount : {{v.amount}}</p>
+                        <a href = "{% url 'main:increase_amount' v.id %}">
+                            <button>+</button>
+                        </a>
+                        <p>{{v.description}}</p>
+                        <br/>
+                        <a href = "{% url 'main:delete' v.id %}">
+                            <button>delete</button>
+                        </a>
+                        
+                    </div>
+                    {% endif %}
                 {% endfor %}
             </div>
             <a href = "{% url 'main:add_vehicle' %}">
@@ -212,5 +258,6 @@
             <a href = "{% url 'main:get_all_vehicle_xml' %}">
                 <button>Vehicle all XML</button>
             </a>
+            
         </footer>
 {% endblock content %}

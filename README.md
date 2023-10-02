@@ -542,3 +542,171 @@ Selector elemen dituliskan dengan menuliskan tag html yang ingin diformat dan me
 
 4. Perbedaan tailwind dan bootstrap adalah bootstrap memberikan komponen dan class css yang telah dirancang sebelumnya sehingga bisa langsung digunakan di dalam aplikasi web, misalkan button, text dan lain-lain. File bootstrap cenderung besar akibat ini karena bootstrap menyediakan berbagai macam komponen siap pakai. Namun, karena hal tersebut bootstrap menjadi lebih susah untuk berkreativitas karena css milik komponen bootstrap tidak bisa kita edit secara lokal.
    Sedangkan untuk tailwindcss memberikan kelas-kelas utilitas yang dapat kita gunakan sendiri untuk membuat komponen yang kita inginkan. Karena tailwindcss hanya menyediakan alat utilitas, maka cenderung ukurannya lebih kecil dari bootstrap. Namun, karena hal ini juga pembelajaran akan tailwind lebih sulit kebanding bootstrap yang hanya tinggal digunakan.
+
+5. Jadi yang pertama saya tambahkan adalah
+   ```python
+   STATIC_ROOT = os.path.join(PROJECT_ROOT, 'static')
+   STATIC_URL = 'static'
+   ```
+   pada file settings.py di inventory/
+   Lalu saya menghias login.html saya dengan menambahkan external css bernama test.css di ./main/static.
+   ```css
+   .login{
+    background-color:#EEEEEE;
+    width:40%;
+    margin:20px;
+    padding:5px 10px 20px 10px;
+    }
+    body{
+        background-color:#FCFBFB;
+    }
+    form{
+        color:#071E22;
+    }
+    ```
+    Selain login.html, register.html juga saya hias menggunakan internal css dengan kode sebagai berikut,
+    ```css
+    <style>
+        .judul-form{
+            display:flex;
+            flex-direction:column;
+            align-items:center;
+        }
+        .badan{
+            display:flex;
+            flex-direction:column;
+            align-items:flex-start;
+            margin-left:100px;
+        }
+        h1{
+            font-family:Arial;
+            color:#000000;
+            font-size:200%;
+        }
+        .container{
+            width:100%;
+            font-family: Arial,'Montserrat', Helvetica, sans-serif;
+            display : flex;
+            flex-direction: column;
+            align-items:center;
+            background-color:#EEEEEE;
+            padding:20px;
+        }
+        .submit{
+            border-radius:4%;
+            padding:1% 5% 1% 5%;
+            border:0px;
+            background-color:#8EC63F;
+            color:#FFFFFF;
+        }
+    
+        .form{
+            display : flex;
+            flex-direction: column;
+            justify-content:center;
+            margin-bottom:10%;
+            color:#071E22;
+            font-size:14px;
+        }
+    
+        input{
+            border-radius:5%;
+        }
+    
+        body{
+            background-color:#FCFBFB;
+        }
+    
+    
+    </style>
+    ```
+    Pada skeleton.html sendiri saya tambahkan navbar sehingga semua file html yang bersumber darinya akan memiliki navbar.
+    Pada tag head skeleton.html saya tambahkan internal css dan pada body saya buat div yang memiliki class navbar
+    ```css
+        <style>
+        body{
+            margin:0;
+        }
+        .navbar{
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            align-items: center;
+            
+            position: sticky;
+            top:0;
+    
+            background-color: antiquewhite;
+            font-family: Arial,'Montserrat', Helvetica, sans-serif;
+            padding:0% 0% 0% 0%;
+            margin:0%;
+        }
+    
+        .navbar #topnav{
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+            background-color: #F19A4D;
+            width: 100%;
+            padding-top: 1%;
+            padding-bottom: 1%;
+        }
+        .navbar #botnav{
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+            width: 100%;
+        }
+    
+        .navbar #navbarTitle{
+            font-weight: 700;
+            font-size: 28px;
+            color: antiquewhite;
+            text-decoration: none;
+        }
+        .navbar #navbarAbout{
+            margin: 0px;
+            position: sticky;
+            top: 0;
+            font-size: 24px;
+            font-weight: 400;
+            color: antiquewhite;
+        }
+    </style>
+    ```
+    ```html
+    <div class="navbar">
+        <div id="topnav">
+            <a href = "" id="navbarTitle">We Want Vehicles</span></a>
+            <p id="navbarAbout">About Us</p>
+        </div>
+        <div id ="botnav">
+        </div>
+    </div>
+    ```
+
+    Untuk bonus, saya menambahkan line 
+    ```html
+    {% if forloop.last %}
+    <div class="cardlast">
+        <p id="cardname">{{v.name}}</p>
+        <img src={{v.image_link}} alt="{{v.name}}">
+        <a href = "{% url 'main:decrease_amount' v.id %}">
+            <button>-</button>
+        </a>
+        <p>Amount : {{v.amount}}</p>
+        <a href = "{% url 'main:increase_amount' v.id %}">
+            <button>+</button>
+        </a>
+        <p>{{v.description}}</p>
+        <br/>
+        <a href = "{% url 'main:delete' v.id %}">
+            <button>delete</button>
+        </a>
+        
+    </div>
+    {% else %}
+    ...
+    {% endif %}
+    ```
+    sehingga saya bisa memodifikasi khusus objek terakhir pada daftar tersebut
