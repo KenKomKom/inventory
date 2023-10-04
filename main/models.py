@@ -12,4 +12,6 @@ class Vehicle (models.Model):
     def update_amount(self, new_amount):
         self.amount=new_amount
         self.save()
+    def __str__(self):
+        return str(self.name)+str(self.pk)
     

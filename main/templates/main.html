@@ -1,5 +1,6 @@
 {% extends "skeleton.html" %}
 {% block meta %}
+
 <style>
 
     body{
@@ -99,7 +100,7 @@
         margin-bottom: 10%;
         margin-top: 0px;
     }
-    .container{
+    #container{
         display: flex;
         justify-content: center;
         gap: 17px;
@@ -166,7 +167,7 @@
         border-radius : 10px;
     } 
     .cardlast{
-        box-sizing: border-box;
+        {% comment %} box-sizing: border-box;
         display: flex;
         background-color: #AABBCC;
         width: 200px;
@@ -175,7 +176,9 @@
         align-items: center;
         border-radius: 5%;
         flex-direction: column;
-        box-shadow:inset;
+        box-shadow:inset; {% endcomment %}
+        background-color:#000000;
+        color:#FFFFFF;
     }
     </style>
 
@@ -202,11 +205,12 @@
                 <p>Kelas : {{class}}</p>
             </div>
         </div>
+        
         <div class = "cards">
             <h1>VEHICLES</h1>
             <h2>Terdapat {{length}} item pada aplikasi ini</h2>
-            <div class = "container">
-                {% for v in vehicle %}
+            <table id = "container">
+                {% comment %} {% for v in vehicle %}
                     {% if forloop.last %}
                     <div class="cardlast">
                         <p id="cardname">{{v.name}}</p>
@@ -244,13 +248,47 @@
                         
                     </div>
                     {% endif %}
-                {% endfor %}
+                {% endfor %} {% endcomment %}
+                </table>
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">Add New Product</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form id="form" onsubmit="return false;">
+                                {% csrf_token %}
+                                <div class="mb-3">
+                                    <label for="name" class="col-form-label">Name:</label>
+                                    <input type="text" class="form-control" id="name" name="name"></input>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="price" class="col-form-label">Price:</label>
+                                    <input type="number" class="form-control" id="price" name="price"></input>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="description" class="col-form-label">Description:</label>
+                                    <textarea class="form-control" id="description" name="description"></textarea>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="description" class="col-form-label">Description:</label>
+                                    <textarea class="form-control" id="image_link" name="image_link"></textarea>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary" id="button_add" data-bs-dismiss="modal">Add Product</button>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <a href = "{% url 'main:add_vehicle' %}">
-                <button>Add Vehicle</button>
-            </a>
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Add Product by AJAX</button>
             <a href ="{% url 'main:logout' %}"><button>Log Out</button></a>
         </div>
+
         <footer>
             <a href = "{% url 'main:get_all_vehicle_json' %}">
                 <button>Vehicle all JSON</button>
@@ -260,4 +298,79 @@
             </a>
             
         </footer>
+
+<script>
+    async function getProducts() {
+        return fetch("{% url 'main:get_product_json' %}").then((res) => res.json())
+    }
+
+    
+    async function refreshProducts() {
+        document.getElementById("container").innerHTML = ""
+        const products = await getProducts()
+        let htmlString = `<tr>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Description</th>
+        </tr>`
+        let idx=0
+        products.forEach((item) => {
+            if(idx===products.length-1){
+                //alert("item id:"+item.pk)
+                htmlString += `\n<tr class="cardlast">
+                    <td>${item.fields.name}</td>
+                    <td>${item.fields.amount}</td>
+                    <td>${item.fields.description}</td>
+                    <td><button id='button-${item.pk}'  onclick="deleteProduct(${item.pk});">delete</button></td>
+                </tr>` 
+            }else{
+                htmlString += `\n<tr>
+                    <td>${item.fields.name}</td>
+                    <td>${item.fields.amount}</td>
+                    <td>${item.fields.description}</td>
+                    <td><button id='button-${item.pk}' onclick="deleteProduct(${item.pk});">delete</button></td>
+                </tr>` 
+            }
+            idx+=1
+        })
+        document.getElementById("container").innerHTML = htmlString
+    }
+
+    refreshProducts()
+
+    function addProduct() {
+        fetch("{% url 'main:add_product_ajax' %}", {
+            method: "POST",
+            body: new FormData(document.querySelector('#form'))
+        }).then(refreshProducts)
+
+        document.getElementById("form").reset()
+        return false
+    }
+
+    document.getElementById("button_add").onclick = addProduct
+
+    async function deleteProduct(id){
+        alert("id: "+id);
+        const product = await getProducts();
+        alert(product)
+        if(id!=null){
+            fetch(`{% url 'main:delete_item_with_id' id=id %}`)
+        }else{
+
+        }
+        /*
+        product.forEach((v) => {
+            //alert("in loop")
+            if(v.pk===id){
+                alert(typeof v)
+                fetch(`{% url 'main:delete_item_with_id' id=v.pk %}`);
+                v.remove()
+            }
+        })
+        */
+        refreshProducts();
+    }
+
+</script>
 {% endblock content %}

@@ -710,3 +710,107 @@ Selector elemen dituliskan dengan menuliskan tag html yang ingin diformat dan me
     {% endif %}
     ```
     sehingga saya bisa memodifikasi khusus objek terakhir pada daftar tersebut
+
+# TUGAS 6
+
+1. Perbedaan dari asynchronous dan synchronous programming adalah program synchronous perlu berjalan tahap demi tahap atau secar asekuensial dimana program perlu menunggu hasil dari program sebelumnya, sedangkan untuk program asynchronous memberikan program untuk berjalan saat program lain masih berjalan sehingga memanfaatkan lebih banyak kemampuan operasi komputer.
+
+2. Event-driven programming adalah cara pemrograman dimana program diutamakan untuk menangani event dari user. Saat suatu event di-triggered, program akan menjalankan function khusus untuk menangani event tersebut yang sudah didekalarasi sebelumnya seperti tombol ditekan, mouse enter, mouse click dan sebagainya. Pada tugas kali ini contoh dari event-driven programming adalah event-handling saat tombol dengan id "button_add" ditekan.
+    ```javascript
+    document.getElementById("button_add").onclick = addProduct
+    ```
+Line tersebut meng-assign function addProduct sehingga saat tombol dengan id "button" add ditekan, function tersebut akan dijalankan.
+3. Asynchronous programming pada AJAX diterapkan dengan cara saat terjadi sebuah event pada halaman web, javascript akan membuat sebuah request berupa XMLHTTPRequest ke server kemudian setelah server sudah memproses request tersebut akan dikembalikan sebuah response yang akan dibaca oleh javascript. Karena pada AJAX digunakan event listener, response yang dikirimkan oleh server tidak perlu ditunggu agar programnya tetap bisa berjalan. Hal ini menyebabkan program menjadi lebih responsive terhadap user interaction dan bisa diupdate tanpa diperlukannya page reload.
+4. Sebagai teknologi yang lebih tua, JQuery memiliki ukuran library yang lebih besar dari fetch karena sudah dikembangkan untuk kurang lebih 15 tahun. Selain itu, JQuery memiliki syntax yang berbeda, untuk menseleksi elemen html, JQuery hanya perlu menuliskan
+```JQuery
+$("p").click(function(){
+  // action goes here!!
+});
+```
+dimana semua tag p akan akan memiliki event handler berupa function. Sedangkan untuk fetch melakukan hal yang sama, perlu diketikan
+```javascript
+document.getElementById("container").onclick = function
+```
+Namun, fetch menggunakan Promises untuk memproses handling asynchronousnya sehingga menjadi lebih baik dari pada JQuery yang menggunakan callback.
+5. Proses pengerjaan checlist dimulai dengan menambahkan line
+```python
+def get_product_json(request):
+    product_item = Vehicle.objects.filter(user=request.user)
+    return HttpResponse(serializers.serialize('json', product_item))
+
+@csrf_exempt
+def add_product_ajax(request):
+    print("add_product_ajax")
+    if request.method == 'POST':
+        name = request.POST.get("name")
+        amount = request.POST.get("price")
+        description = request.POST.get("description")
+        image_link = request.POST.get("image_link")
+        user = request.user
+
+        new_product = Vehicle(name=name, amount=amount , description=description, image_link=image_link ,user=user)
+        new_product.save()
+
+        return HttpResponse(b"CREATED", status=201)
+
+    return HttpResponseNotFound()
+```
+pada main/views.py, setelah itu dilanjutkan dengan penambahan line di main/urls.py agar function menajdi bisa di akses
+```python
+path('get-product/', get_product_json, name='get_product_json'),
+path('create-product-ajax/', add_product_ajax, name='add_product_ajax'),
+```
+Lalu pada main/templates/main.html ditambahkan tag script yang berisi javascript untuk memproses event secara asynchronous dengan fetch
+```javascript
+    async function getProducts() {
+        return fetch("{% url 'main:get_product_json' %}").then((res) => res.json())
+    }
+
+    
+    async function refreshProducts() {
+        document.getElementById("container").innerHTML = ""
+        const products = await getProducts()
+        let htmlString = `<tr>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Description</th>
+        </tr>`
+        let idx=0
+        products.forEach((item) => {
+            if(idx===products.length-1){
+                //alert("item id:"+item.pk)
+                htmlString += `\n<tr class="cardlast">
+                    <td>${item.fields.name}</td>
+                    <td>${item.fields.amount}</td>
+                    <td>${item.fields.description}</td>
+                    <td><button id='button-${item.pk}'  onclick="deleteProduct(${item.pk});">delete</button></td>
+                </tr>` 
+            }else{
+                htmlString += `\n<tr>
+                    <td>${item.fields.name}</td>
+                    <td>${item.fields.amount}</td>
+                    <td>${item.fields.description}</td>
+                    <td><button id='button-${item.pk}' onclick="deleteProduct(${item.pk});">delete</button></td>
+                </tr>` 
+            }
+            idx+=1
+        })
+        document.getElementById("container").innerHTML = htmlString
+    }
+
+    refreshProducts()
+
+    function addProduct() {
+        fetch("{% url 'main:add_product_ajax' %}", {
+            method: "POST",
+            body: new FormData(document.querySelector('#form'))
+        }).then(refreshProducts)
+
+        document.getElementById("form").reset()
+        return false
+    }
+
+    document.getElementById("button_add").onclick = addProduct
+
+```
+getProducts berguna untuk mendapatkan HTTPResponse dari function main.get_product_json yang kemudian diubah menjadi json. Function refreshProducts berguna untuk menunggu hingga mendapatkan json dari getProducts dan mengupdate html sehingga page website berubah tanpa diperlukannya reloading. Function addProduct berguna untuk menambahkan product ke dalam database django.

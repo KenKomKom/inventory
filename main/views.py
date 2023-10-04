@@ -1,6 +1,6 @@
 import datetime
 from django.shortcuts import render
-from django.http import HttpResponseRedirect, HttpResponse
+from django.http import HttpResponseNotFound, HttpResponseRedirect, HttpResponse
 from django.urls import reverse
 from django.core import serializers
 
@@ -12,6 +12,8 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login, authenticate, logout
 from django.contrib import messages
 
+from django.views.decorators.csrf import csrf_exempt
+
 
 @login_required(login_url='/login')
 def main(request):
@@ -22,7 +24,7 @@ def main(request):
     response['length']=len(all_vehicle)
     response['vehicle']= all_vehicle
     response['session']=request.COOKIES['last_login']
-    print(all_vehicle)
+    # print(all_vehicle)
     
     return render(request, 'main.html', response)
 
@@ -101,6 +103,7 @@ def get_vehicle_json(request,id,id2=-1):
                 temp+=[v]
         return HttpResponse(serializers.serialize('json',temp), content_type="application/json")
     else:
+        print("in get vehicle json")
         all_vehicles = Vehicle.objects.filter(pk=id)
         return HttpResponse(serializers.serialize('json',all_vehicles), content_type="application/json")
 
@@ -132,3 +135,29 @@ def delete_this_item(request, id):
     temp = Vehicle.objects.get(id=id)
     temp.delete()
     return HttpResponseRedirect(reverse("main:main"))
+
+def get_product_json(request):
+    product_item = Vehicle.objects.filter(user=request.user)
+    return HttpResponse(serializers.serialize('json', product_item))
+
+@csrf_exempt
+def add_product_ajax(request):
+    print("add_product_ajax")
+    if request.method == 'POST':
+        name = request.POST.get("name")
+        amount = request.POST.get("price")
+        description = request.POST.get("description")
+        image_link = request.POST.get("image_link")
+        user = request.user
+
+        new_product = Vehicle(name=name, amount=amount , description=description, image_link=image_link ,user=user)
+        new_product.save()
+
+        return HttpResponse(b"CREATED", status=201)
+
+    return HttpResponseNotFound()
+
+def delete_item_with_id(request, id):
+    temp = Vehicle.objects.get(id=id)
+    temp.delete()
+    print("in deleted_item_with_id")
