@@ -157,7 +157,32 @@ def add_product_ajax(request):
 
     return HttpResponseNotFound()
 
-def delete_item_with_id(request, id):
-    temp = Vehicle.objects.get(id=id)
-    temp.delete()
-    print("in deleted_item_with_id")
+@csrf_exempt
+def delete_item_with_id(request):
+    if request.method=='POST':
+        id = request.POST.get("id")
+        temp = Vehicle.objects.get(pk=id)
+        temp.delete()
+        return HttpResponse(b"CREATED", status=201)
+    return HttpResponseNotFound()
+
+@csrf_exempt
+def decrease_amount_ajax(request):
+    if request.method == 'POST':
+        id = request.POST.get("id")
+        temp = Vehicle.objects.get(pk=id)
+        if(temp.amount>0):
+            temp.update_amount(temp.amount-1)
+        return HttpResponse(b"CREATED", status=201)
+    return HttpResponseNotFound()
+
+@csrf_exempt
+def increase_amount_ajax(request):
+    print("in increase views.py")
+    if request.method == 'POST':
+        id = request.POST.get("id")
+        temp = Vehicle.objects.get(pk=id)
+        print(temp)
+        temp.update_amount(temp.amount+1)
+        return HttpResponse(b"CREATED", status=201)
+    return HttpResponseNotFound()

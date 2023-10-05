@@ -711,8 +711,8 @@ Selector elemen dituliskan dengan menuliskan tag html yang ingin diformat dan me
     ```
     sehingga saya bisa memodifikasi khusus objek terakhir pada daftar tersebut
 
-# TUGAS 6
-
+TUGAS 6
+--- 
 1. Perbedaan dari asynchronous dan synchronous programming adalah program synchronous perlu berjalan tahap demi tahap atau secar asekuensial dimana program perlu menunggu hasil dari program sebelumnya, sedangkan untuk program asynchronous memberikan program untuk berjalan saat program lain masih berjalan sehingga memanfaatkan lebih banyak kemampuan operasi komputer.
 
 2. Event-driven programming adalah cara pemrograman dimana program diutamakan untuk menangani event dari user. Saat suatu event di-triggered, program akan menjalankan function khusus untuk menangani event tersebut yang sudah didekalarasi sebelumnya seperti tombol ditekan, mouse enter, mouse click dan sebagainya. Pada tugas kali ini contoh dari event-driven programming adalah event-handling saat tombol dengan id "button_add" ditekan.
