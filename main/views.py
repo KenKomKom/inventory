@@ -137,6 +137,7 @@ def delete_this_item(request, id):
     return HttpResponseRedirect(reverse("main:main"))
 
 def get_product_json(request):
+    print("in get_product_json")
     product_item = Vehicle.objects.filter(user=request.user)
     return HttpResponse(serializers.serialize('json', product_item))
 

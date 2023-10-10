@@ -167,7 +167,7 @@
         border-radius : 10px;
     } 
     .cardlast{
-        {% comment %} box-sizing: border-box;
+        box-sizing: border-box;
         display: flex;
         background-color: #AABBCC;
         width: 200px;
@@ -176,7 +176,7 @@
         align-items: center;
         border-radius: 5%;
         flex-direction: column;
-        box-shadow:inset; {% endcomment %}
+        box-shadow:inset; 
         background-color:#000000;
         color:#FFFFFF;
     }
@@ -208,9 +208,9 @@
         
         <div class = "cards">
             <h1>VEHICLES</h1>
-            <h2>Terdapat {{length}} item pada aplikasi ini</h2>
-            <table id = "container">
-                {% comment %} {% for v in vehicle %}
+            <h2 id="panjang">Terdapat {{length}} item pada aplikasi ini</h2>
+            <div id = "container">
+                {% for v in vehicle %}
                     {% if forloop.last %}
                     <div class="cardlast">
                         <p id="cardname">{{v.name}}</p>
@@ -248,8 +248,8 @@
                         
                     </div>
                     {% endif %}
-                {% endfor %} {% endcomment %}
-                </table>
+                {% endfor %}
+                </div>
             <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
@@ -304,36 +304,63 @@
         return fetch("{% url 'main:get_product_json' %}").then((res) => res.json())
     }
 
-    
+    let length =0;
+
     async function refreshProducts() {
         document.getElementById("container").innerHTML = ""
         const products = await getProducts()
         
-        let htmlString = `<tr>
-            <th>Name</th>
-            <th>Price</th>
-            <th>Description</th>
-        </tr>`
+        let htmlString =""
         let idx=0
         products.forEach((item) => {
-            if(idx===products.length-1){
+            if(idx==products.length-1){
                 //alert("item id:"+item.pk)
+                /*
                 htmlString += `\n<tr class="cardlast">
                     <td>${item.fields.name}</td>
                     <td><button id='-${item.pk}'  onclick="decreaseProduct(${item.pk});">-</button>${item.fields.amount}<button id='+${item.pk}'  onclick="increaseProduct(${item.pk});">+</button></td>
                     <td>${item.fields.description}</td>
                     <td><button id='button-${item.pk}'  onclick="deleteProduct(${item.pk});">delete</button></td>
                 </tr>` 
+                */
+                htmlString+=`<div class="cardlast">
+                    <p id="cardname">${item.fields.name}</p>
+                    <img src=${item.fields.image_link} alt=${item.fields.name}>
+
+                    <button id="+${item.pk}" onclick="increaseProduct(${item.pk});">+</button>
+                    <p>Amount : ${item.fields.amount}</p>
+                    <button id="-${item.pk}" onclick="decreaseProduct(${item.pk});">-</button>
+                    <p>{{v.description}}</p>
+                    <br/>
+                    <button id='button-${item.pk}'  onclick="deleteProduct(${item.pk});">delete</button>
+                    
+                </div>`
             }else{
+                /*
                 htmlString += `\n<tr>
                     <td>${item.fields.name}</td>
                     <td><button id='-${item.pk}'  onclick="decreaseProduct(${item.pk});">-</button>${item.fields.amount}<button id='+${item.pk}'  onclick="increaseProduct(${item.pk});">+</button></td>
                     <td>${item.fields.description}</td>
                     <td><button id='button-${item.pk}' onclick="deleteProduct(${item.pk});">delete</button></td>
                 </tr>` 
+                */
+                htmlString+=`<div class="card">
+                    <p id="cardname">${item.fields.name}</p>
+                    <img src=${item.fields.image_link} alt=${item.fields.name}>
+
+                    <button id="+${item.pk}" onclick="increaseProduct(${item.pk});">+</button>
+                    <p>Amount : ${item.fields.amount}</p>
+                    <button id="-${item.pk}" onclick="decreaseProduct(${item.pk});">-</button>
+                    <p>{{v.description}}</p>
+                    <br/>
+                    <button id='button-${item.pk}'  onclick="deleteProduct(${item.pk});">delete</button>
+                    
+                </div>`
             }
             idx+=1
         })
+        length = idx;
+        document.getElementById("panjang").innerHTML="Terdapat "+length+" item pada aplikasi ini"
         document.getElementById("container").innerHTML = htmlString
     }
 
@@ -342,18 +369,17 @@
     function addProduct() {
         fetch("{% url 'main:add_product_ajax' %}", {
             method: "POST",
-            body: new FormData(document.querySelector('#form'))
+            body: new FormData(document.querySelector("#form"))
         }).then(refreshProducts)
-
         document.getElementById("form").reset()
         return false
     }
 
     document.getElementById("button_add").onclick = addProduct
 
-    async function deleteProduct(id){
+    function deleteProduct(id){
 
-        const formData = new FormData(document.querySelector('#form'))
+        const formData = new FormData()
         formData.append("id", id)
 
         fetch("{% url 'main:delete_item_with_id' %}",{
@@ -364,9 +390,9 @@
         return false
     }
 
-    async function increaseProduct(id){
+    function increaseProduct(id){
 
-        const formData = new FormData(document.querySelector('#form'))
+        const formData = new FormData()
         formData.append("id", id)
 
         fetch("{% url 'main:increase_product_ajax' %}",{
@@ -377,7 +403,7 @@
         return false
     }
 
-    async function decreaseProduct(id){
+    function decreaseProduct(id){
 
         const formData = new FormData(document.querySelector('#form'))
         formData.append("id", id)
