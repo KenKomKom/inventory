@@ -372,6 +372,7 @@
             body: new FormData(document.querySelector("#form"))
         }).then(refreshProducts)
         document.getElementById("form").reset()
+        console.log("end add")
         return false
     }
 
@@ -407,12 +408,12 @@
 
         const formData = new FormData(document.querySelector('#form'))
         formData.append("id", id)
-
+        
         fetch("{% url 'main:decrease_product_ajax' %}",{
             method: "POST",
             body: formData
         }).then(refreshProducts)
-
+    
         return false
     }
 

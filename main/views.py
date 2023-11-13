@@ -91,7 +91,7 @@ def get_all_vehicle_json(request):
 
 def get_all_vehicle_xml(request):
     all_vehicles = Vehicle.objects.all()
-    return HttpResponse(serializers.serialize('xml',all_vehicles), content_type="application/xml")
+    return HttpResponse(serializers.serialize('xml',all_vehicles), content_type="application/json")
 
 def get_vehicle_json(request,id,id2=-1):
     if(id2!=-1):
@@ -169,11 +169,15 @@ def delete_item_with_id(request):
 
 @csrf_exempt
 def decrease_amount_ajax(request):
+    print("in decrease amount ajax")
     if request.method == 'POST':
-        id = request.POST.get("id")
+        print(request.body)
+        id = request.body.get("id")
+        print("id ",id)
         temp = Vehicle.objects.get(pk=id)
         if(temp.amount>0):
             temp.update_amount(temp.amount-1)
+            print(temp)
         return HttpResponse(b"CREATED", status=201)
     return HttpResponseNotFound()
 
