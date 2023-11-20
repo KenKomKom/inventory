@@ -29,17 +29,17 @@ CORS_ALLOWED_ORIGINS = [
 
 LOGIN_REDIRECT_URL = 'http://kenichi-komala-tugas.pbp.cs.ui.ac.id/'  # yg lu pengen redir kalo misalny selesai loggin
 
-CORS_ALLOW_HEADERS=[
+CORS_ALLOW_HEADERS = [
     'accept',
-    'ccept-encoding',
+    'accept-encoding',
     'authorization',
     'content-type',
     'dnt',
     'origin',
-    'user_agent',
+    'user-agent',
     'x-csrftoken',
     'x-requested-with',
-    'acces-control-allow-origin'
+    'access-control-allow-origin',
 ]
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
