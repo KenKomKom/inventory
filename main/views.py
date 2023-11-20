@@ -211,6 +211,8 @@ def create_product_flutter(request):
         
         data = json.loads(request.body)
 
+        print(request.user)
+
         new_product = Vehicle.objects.create(
             user = request.user,
             name = data["name"],
@@ -219,6 +221,7 @@ def create_product_flutter(request):
         )
 
         new_product.save()
+        print("masuk")
 
         return JsonResponse({"status": "success"}, status=200)
     else:
