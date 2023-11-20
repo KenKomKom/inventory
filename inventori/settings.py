@@ -14,6 +14,34 @@ from pathlib import Path
 import os
 import environ
 
+CSRF_TRUSTED_ORIGINS = ['https://kenichi-komala-tutorial.pbp.cs.ui.ac.id']
+CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOW_CREDENTIALS = True
+CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SAMESITE = 'None'
+SESSION_COOKIE_SAMESITE = 'None'
+SECURE_CROSS_ORIGIN_OPENER_POLICY = "unsafe-none"
+
+CORS_ALLOWED_ORIGINS = [
+    "https://kenichi-komala-tutorial.pbp.cs.ui.ac.id",
+]
+
+LOGIN_REDIRECT_URL = 'http://kenichi-komala-tutorial.pbp.cs.ui.ac.id/'  # yg lu pengen redir kalo misalny selesai loggin
+
+CORS_ALLOW_HEADERS=[
+    'accept',
+    'ccept-encoding',
+    'authorization',
+    'content-type',
+    'dnt',
+    'origin',
+    'user_agent',
+    'x-csrftoken',
+    'x-requested-with',
+    'acces-control-allow-origin'
+]
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
