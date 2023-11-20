@@ -31,6 +31,7 @@ def main(request):
     
     return render(request, 'main.html', response)
 
+@csrf_exempt
 def login_user(request):
     if request.method == 'POST':
         username = request.POST.get('username')
