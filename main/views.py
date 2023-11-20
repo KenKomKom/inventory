@@ -48,6 +48,7 @@ def login_user(request):
             messages.info(request,'fail to login')
     return render(request, 'login.html', {})
 
+@csrf_exempt
 def register(request):
     # form = UserCreationForm()
     form = UserCreationForm(request.POST)
@@ -70,6 +71,7 @@ def register(request):
     response = {'form':form}
     return render (request, 'register.html',response)
 
+@csrf_exempt
 def logout_user(request):
     logout(request)
     response = HttpResponseRedirect(reverse('main:login'))
