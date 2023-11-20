@@ -15,6 +15,8 @@ from django.contrib import messages
 
 from django.views.decorators.csrf import csrf_exempt
 
+from django.contrib.auth.models import User
+
 
 @login_required(login_url='/login')
 def main(request):
@@ -87,7 +89,14 @@ def add_vehicle(request):
     return render(request, "add_vehicle.html", response)
 
 def get_all_vehicle_json(request):
+    print('11')
     all_vehicles = Vehicle.objects.all()
+    return HttpResponse(serializers.serialize('json',all_vehicles), content_type="application/json")
+
+@csrf_exempt
+def get_owned_vehicle_json(request, id):
+    print("id:",id)
+    all_vehicles = Vehicle.objects.filter(user__pk=id)
     return HttpResponse(serializers.serialize('json',all_vehicles), content_type="application/json")
 
 def get_all_vehicle_xml(request):
@@ -193,6 +202,7 @@ def increase_amount_ajax(request):
         return HttpResponse(b"CREATED", status=201)
     return HttpResponseNotFound()
 
+@csrf_exempt
 def create_product_flutter(request):
     if request.method == 'POST':
         
@@ -201,7 +211,7 @@ def create_product_flutter(request):
         new_product = Vehicle.objects.create(
             user = request.user,
             name = data["name"],
-            price = int(data["price"]),
+            amount = int(data["amount"]),
             description = data["description"]
         )
 

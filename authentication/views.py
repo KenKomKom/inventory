@@ -3,6 +3,8 @@ from django.contrib.auth import authenticate, login as auth_login
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth import logout as auth_logout
+from django.contrib.auth.models import User
+
 
 @csrf_exempt
 def login(request):
@@ -15,6 +17,7 @@ def login(request):
             # Status login sukses.
             return JsonResponse({
                 "username": user.username,
+                'id':user.pk,
                 "status": True,
                 "message": "Login sukses!"
                 # Tambahkan data lainnya jika ingin mengirim data ke Flutter.
@@ -46,4 +49,34 @@ def logout(request):
         return JsonResponse({
         "status": False,
         "message": "Logout gagal."
+        }, status=401)
+
+@csrf_exempt  
+def register(request):
+    print('register auth')
+    # form = UserCreationForm()
+    username = request.POST['username']
+    password1 = request.POST['password']
+    password2 = request.POST['reconfirmPassword']
+
+    if(password1==password2):
+
+        try:
+            user= User.objects.create_user(username=username,password=password1)
+            if(user!=None):
+                user.save()
+                return JsonResponse({
+                "username": user.username,
+                "status": True,
+                "message": "Register berhasil"
+            }, status=200)
+        except:
+                return JsonResponse({
+                "status": False,
+                "message": "Register gagal, username sudah terambil."
+                }, status=401)
+    else:
+        return JsonResponse({
+            "status": False,
+            "message": "Register gagal, password tidak terkonfirmasi sama."
         }, status=401)

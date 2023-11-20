@@ -12,6 +12,7 @@ urlpatterns = [
     path('all-vehicle-json/', get_all_vehicle_json, name='get_all_vehicle_json'),
     path('all-vehicle-xml/', get_all_vehicle_xml, name='get_all_vehicle_xml'),
     path('all-vehicles-json/', get_all_vehicle_json, name='get_all_vehicle_json'),
+    path('owned-vehicles-json/<int:id>', get_owned_vehicle_json, name='get_owned_vehicle_json'),
     path('all-vehicles-xml/', get_all_vehicle_xml, name='get_all_vehicle_xml'),
     path('get-vehicles-xml/<int:id>/', get_vehicle_xml, name='get_one_vehicle_xml'),
     path('get-vehicles-json/<int:id>/', get_vehicle_json, name='get_one_vehicle_json'),
