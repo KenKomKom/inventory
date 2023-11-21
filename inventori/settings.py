@@ -14,6 +14,7 @@ from pathlib import Path
 import os
 import environ
 
+
 CSRF_TRUSTED_ORIGINS = ['https://kenichi-komala-tugas.pbp.cs.ui.ac.id']
 CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOW_CREDENTIALS = True
