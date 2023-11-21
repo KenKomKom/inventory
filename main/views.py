@@ -18,6 +18,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.models import User
 
 
+
 @login_required(login_url='/login')
 def main(request):
     response = {'name':request.user.username,'class': 'PBP D'}
