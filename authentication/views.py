@@ -59,6 +59,9 @@ def register(request):
     data = json.loads(request.body)
     # form = UserCreationForm()
     
+    # username = request.POST['username']
+    # password1 = request.POST['password']
+    # password2 = request.POST['reconfirmPassword']
     username = data['username']
     password1 = data['password']
     password2 = data['reconfirmPassword']
