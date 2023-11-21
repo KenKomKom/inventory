@@ -39,7 +39,6 @@ def login(request):
 @csrf_exempt
 def logout(request):
     username = request.user.username
-
     try:
         auth_logout(request)
         return JsonResponse({
