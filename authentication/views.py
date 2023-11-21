@@ -1,3 +1,4 @@
+import json
 from django.shortcuts import render
 from django.contrib.auth import authenticate, login as auth_login
 from django.http import JsonResponse
@@ -55,10 +56,12 @@ def logout(request):
 @csrf_exempt  
 def register(request):
     print('register auth')
+    data = json.loads(request.body)
     # form = UserCreationForm()
-    username = request.POST['username']
-    password1 = request.POST['password']
-    password2 = request.POST['reconfirmPassword']
+    
+    username = data['username']
+    password1 = data['password']
+    password2 = data['reconfirmPassword']
 
     if(password1==password2):
 
