@@ -23,6 +23,7 @@ CSRF_COOKIE_SAMESITE = 'None'
 SESSION_COOKIE_SAMESITE = 'None'
 SECURE_CROSS_ORIGIN_OPENER_POLICY = "unsafe-none"
 
+
 CORS_ALLOWED_ORIGINS = [
     "https://kenichi-komala-tugas.pbp.cs.ui.ac.id",
 ]
