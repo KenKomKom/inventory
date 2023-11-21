@@ -103,6 +103,7 @@ def get_owned_vehicle_json(request, id):
     all_vehicles = Vehicle.objects.filter(user__pk=id)
     return HttpResponse(serializers.serialize('json',all_vehicles), content_type="application/json")
 
+
 def get_all_vehicle_xml(request):
     all_vehicles = Vehicle.objects.all()
     return HttpResponse(serializers.serialize('xml',all_vehicles), content_type="application/json")
